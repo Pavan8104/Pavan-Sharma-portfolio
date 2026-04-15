@@ -1,6 +1,5 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { useAppStore } from '../stores/appStore';
-import { AnimatePresence } from 'framer-motion';
 import BootScreen from './BootScreen';
 import Navbar from './Navbar';
 import ScanLines from './effects/ScanLines';

@@ -8,9 +8,10 @@ interface ProjectCardProps {
   project: Project;
   index: number;
   featured?: boolean;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export default function ProjectCard({ project, index, featured = false }: ProjectCardProps) {
+export default function ProjectCard({ project, index, featured = false, onClick }: ProjectCardProps) {
   const [blast, setBlast] = useState<{ x: number, y: number, active: boolean } | null>(null);
 
   const handleNavigate = (e: React.MouseEvent | React.TouchEvent, link: string) => {
@@ -90,6 +91,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
       }}
       onHoverStart={() => playSound('hover')}
       onClick={(e) => {
+        if (onClick) onClick(e);
         const link = project.github || project.live;
         if (link && !blast?.active) handleNavigate(e, link);
       }}
