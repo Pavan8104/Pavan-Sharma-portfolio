@@ -118,5 +118,13 @@ export const projects: Project[] = [
     tags: ['Frontend', 'Deployment'],
     live: 'https://flourishing-sfogliatella-b25a54.netlify.app/',
     domain: 'Frontend',
+  },
+  {
+    id: '14',
+    title: 'Car Simulation',
+    description: 'A live car simulation web experience demonstrating interactive controls and responsive visuals.',
+    tags: ['React', 'Simulation', 'Frontend'],
+    live: 'https://car-simulatio.vercel.app/',
+    domain: 'Frontend',
   }
 ];
