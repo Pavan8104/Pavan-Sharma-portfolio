@@ -9,12 +9,28 @@ export interface Project {
   live?: string;
   featured?: boolean;
   domain?: DomainKey;
+  extraLinks?: { label: string; url: string }[];
 }
 
 export const projects: Project[] = [
   // FEATURED PROJECTS (TOP 4)
-  {
+{
     id: '1',
+    title: 'CloudOPS Cloud Management Platform',
+    description: 'Cloud internal management system with AI assistance.',
+    tags: ['React', 'Python', 'Docker', 'Railway', 'AI'],
+    github: 'https://github.com/Pavan8104/CloudOpsdashboard',
+    live: 'https://cloudops-frontend-production.up.railway.app/login',
+    extraLinks: [
+      { label: 'Frontend Docker', url: 'https://hub.docker.com/r/ps8104/cloudops-frontend' },
+      { label: 'Backend Docker', url: 'https://hub.docker.com/r/ps8104/cloudops-backend' }
+    ],
+    featured: true,
+    domain: 'Data Science',
+  },
+
+  {
+    id: '2',
     title: 'Web Traffic Analyzer',
     description: 'A data-driven application that analyzes user behavior and trends to generate insights.',
     tags: ['Python', 'Data Analysis'],
@@ -24,7 +40,7 @@ export const projects: Project[] = [
     domain: 'Data Science',
   },
   {
-    id: '2',
+    id: '3',
     title: 'HireOnix AI',
     description: 'A top AI web platform showcasing live intelligent automation, smart workflows, and premium AI-driven demos.',
     tags: ['AI', 'Web', 'Automation'],
@@ -33,7 +49,7 @@ export const projects: Project[] = [
     domain: 'AI / RAG',
   },
   {
-    id: '3',
+    id: '4',
     title: 'Sentinel AI: LLM Red Teaming Framework',
     description: 'A human-centric AI safety system designed to evaluate and improve the robustness of Large Language Models (LLMs) through adversarial attacks, alignment checks, and safety mechanisms.',
     tags: ['Python', 'AI/ML', 'Security', 'LLM'],
@@ -41,7 +57,7 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: '3',
+    id: '5',
     title: 'Finance Analytics Backend',
     description: 'A robust Python-based backend system for financial data analytics, forecasting, and processing.',
     tags: ['Python', 'Backend', 'Data Processing'],
@@ -49,7 +65,7 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: '4',
+    id: '6',
     title: 'Laptop Price Prediction Model',
     description: 'A machine learning model utilizing regression techniques to accurately predict laptop prices based on hardware specifications.',
     tags: ['Jupyter', 'Machine Learning', 'Data Science'],
@@ -59,21 +75,21 @@ export const projects: Project[] = [
   
   // SECONDARY PROJECTS
   {
-    id: '5',
+    id: '7',
     title: 'Face Recognition System',
     description: 'An automated facial recognition and detection system built and optimized for macOS environments.',
     tags: ['Python', 'Computer Vision', 'AI'],
     github: 'https://github.com/Pavan8104/Face-recogination-mac-environment',
   },
   {
-    id: '6',
+    id: '8',
     title: 'Advanced DSA & CP',
     description: 'A rich collection of advanced Data Structures and Algorithms implementations and competitive programming solutions.',
     tags: ['C++', 'DSA', 'Problem Solving'],
     github: 'https://github.com/Pavan8104/CP',
   },
   {
-    id: '7',
+    id: '9',
     title: 'Beamish Quokka',
     description: 'An interactive web application showcasing seamless UI/UX design components and responsive layouts.',
     tags: ['React', 'Web'],
@@ -81,7 +97,7 @@ export const projects: Project[] = [
     domain: 'AI / RAG',
   },
   {
-    id: '8',
+    id: '10',
     title: 'Courageous Queijadas',
     description: 'A dynamic frontend project with a strong focus on strict component architecture and performance.',
     tags: ['Frontend', 'UI/UX'],
@@ -89,7 +105,7 @@ export const projects: Project[] = [
     domain: 'AI / RAG',
   },
   {
-    id: '9',
+    id: '11',
     title: 'Vocal Mermaid',
     description: 'An exploratory web interface demonstrating responsive grids and strict accessibility rules.',
     tags: ['React', 'CSS'],
@@ -97,7 +113,7 @@ export const projects: Project[] = [
     domain: 'Frontend',
   },
   {
-    id: '10',
+    id: '12',
     title: 'Zingy Concha',
     description: 'A creative web application highlighting modern design principles and high-end animations.',
     tags: ['Web', 'Design'],
@@ -105,7 +121,7 @@ export const projects: Project[] = [
     domain: 'Frontend',
   },
   {
-    id: '11',
+    id: '13',
     title: 'PSpotify',
     description: 'A custom music streaming interface clone featuring audio integrations and sleek dark-mode styling.',
     tags: ['React', 'Media'],
@@ -113,7 +129,7 @@ export const projects: Project[] = [
     domain: 'Frontend',
   },
   {
-    id: '12',
+    id: '14',
     title: 'Portfolio Website',
     description: 'A dark-themed cyberpunk interactive portfolio for showcasing professional projects and skills.',
     tags: ['React', 'Three.js', 'Tailwind'],
@@ -121,7 +137,7 @@ export const projects: Project[] = [
     domain: 'Frontend',
   },
   {
-    id: '13',
+    id: '15',
     title: 'Flourishing Sfogliatella',
     description: 'A modern landing page application built to demonstrate rapid prototyping and Vercel/Netlify deployment.',
     tags: ['Frontend', 'Deployment'],
@@ -129,7 +145,7 @@ export const projects: Project[] = [
     domain: 'Frontend',
   },
   {
-    id: '14',
+    id: '16',
     title: 'Car Simulation',
     description: 'A live car simulation web experience demonstrating interactive controls and responsive visuals.',
     tags: ['React', 'Simulation', 'Frontend'],

@@ -37,38 +37,7 @@ export default function ProjectCard({ project, index, featured = false, onClick 
     }, 900);
   };
 
-  // Helper to auto-generate names from URLs (e.g. beamish-quokka -> Beamish Quokka)
-  const getAutoTitle = () => {
-    // If the data already contains the exact title intended by the user, respect it first:
-    // Actually, per instruction to auto-format from URL, we parse the URL heavily:
-    const urlString = project.live || project.github; // Prioritize live links for slug
-    if (urlString) {
-      try {
-        const url = new URL(urlString);
-        let slug = url.pathname.split('/').filter(Boolean).pop();
-        
-        if (!slug || slug === '') {
-          // If the link is the root of a deployment service, parse the subdomain
-          const hostnameParts = url.hostname.split('.');
-          if (hostnameParts.length > 2) {
-             slug = hostnameParts[0].replace(/-[a-z0-9]{6,20}$/i, ''); // Strip netlify/vercel/streamlit hashes
-          } else {
-             slug = hostnameParts[0];
-          }
-        }
-        
-        if (slug && slug.length > 2) { // Ensure slug is substantial and not a generic string
-          return slug
-            .split(/[-_]+/)
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-            .join(' ');
-        }
-      } catch { /* graceful fallback */ }
-    }
-    return project.title;
-  };
-
-  const displayTitle = getAutoTitle();
+  const displayTitle = project.title;
 
   return (
     <motion.div
@@ -109,7 +78,7 @@ export default function ProjectCard({ project, index, featured = false, onClick 
         <div className="relative z-10 p-6 sm:p-8 flex flex-col h-full min-h-[220px]">
           {/* Title */}
           <h3 className={`font-cyber mb-3 ${featured ? 'text-2xl text-neon-pink tracking-widest' : 'text-xl text-cyber-blue tracking-wider'}`}>
-            {displayTitle}
+            {project.title}
           </h3>
           
           {/* Description */}
