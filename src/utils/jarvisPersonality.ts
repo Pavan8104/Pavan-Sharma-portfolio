@@ -17,7 +17,7 @@ export function transformToJarvisPrefix(text: string): string {
     .replace(/^This portfolio\b/i, "My boss Pavan's portfolio")
     .replace(/^The portfolio highlights\b/i, "My boss Pavan's portfolio highlights")
     .replace(/^Certifications include\b/i, "My boss Pavan's certifications include")
-    .replace(/^I understand this portfolio\b/i, "My boss Pavan's assistant is ready to guide you")
+    .replace(/^I understand this portfolio well\./i, "My boss Pavan's assistant is fully briefed.")
     .replace(
       /\. I can tell you more if you want to explore other portfolio items\./i,
       ". Further details are available across all portfolio sections."
