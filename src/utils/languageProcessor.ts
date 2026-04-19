@@ -1,5 +1,29 @@
 export type LanguageMode = 'en' | 'hi' | 'sv' | 'hinglish';
 
+export function detectLanguage(text: string): LanguageMode {
+  const trimmed = text.trim();
+  if (!trimmed) return 'en';
+
+  // Devanagari script characters = definite Hindi
+  const devanagari = (trimmed.match(/[\u0900-\u097F]/g) ?? []).length;
+  const chars = trimmed.replace(/\s/g, '').length;
+  if (devanagari > 0 && chars > 0 && devanagari / chars > 0.2) return 'hi';
+
+  // Swedish high-frequency closed-class words
+  const words = trimmed.split(/\s+/).filter(Boolean);
+  const svHits = words.filter((w) =>
+    /^(och|det|att|är|inte|har|med|för|på|av|kan|men|om|ett|som|vi|han|hon|ska|var|en|de|sig|sin|vad|hur)$/i.test(w)
+  ).length;
+  if (words.length >= 3 && svHits / words.length > 0.3) return 'sv';
+
+  // Hinglish: common Hindi words in Roman script mixed with English
+  const hinglishPattern =
+    /\b(kya|hai|mera|tera|aur|nahi|haan|bilkul|bahut|accha|theek|karo|bolo|batao|dekho|bata|yeh|woh|main|hum|aap|tumhara|apna|isko|usko)\b/i;
+  if (hinglishPattern.test(trimmed)) return 'hinglish';
+
+  return 'en';
+}
+
 const hindiPhrases: Record<string, string> = {
   '\btumne kya banaya hai\b': 'projects built',
   '\bkya banaya\b': 'projects built',

@@ -42,6 +42,7 @@ export default function Chatbot() {
     toggleListening,
     speechEnabled,
     toggleSpeech,
+    voicesReady,
     suggestions,
     links,
     workflowStatus,
@@ -110,22 +111,37 @@ export default function Chatbot() {
             {/* Controls row */}
             <div className="px-4 py-2 border-b border-cyber-blue/10 shrink-0">
               <div className="flex items-center justify-between gap-2">
-                <select
-                  value={languageMode}
-                  onChange={(e) => setLanguageMode(e.target.value as LanguageMode)}
-                  className="bg-black/60 border border-cyber-blue/20 text-cyber-blue text-xs rounded-lg px-2 py-1.5 outline-none"
-                >
-                  {Object.entries(languageLabels).map(([value, label]) => (
-                    <option key={value} value={value}>{label}</option>
-                  ))}
-                </select>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[9px] text-cyber-blue-dim uppercase tracking-wider px-1">
+                    Auto-detected
+                  </span>
+                  <select
+                    value={languageMode}
+                    onChange={(e) => setLanguageMode(e.target.value as LanguageMode)}
+                    title="Language auto-detected from input — override here"
+                    className="bg-black/60 border border-cyber-blue/20 text-cyber-blue text-xs rounded-lg px-2 py-1.5 outline-none"
+                  >
+                    {Object.entries(languageLabels).map(([value, label]) => (
+                      <option key={value} value={value}>{label}</option>
+                    ))}
+                  </select>
+                </div>
                 <button
                   type="button"
                   onClick={toggleSpeech}
-                  title={speechEnabled ? 'Mute voice' : 'Enable voice'}
-                  className={`w-9 h-9 rounded-xl border text-sm ${speechEnabled ? 'border-neon-pink bg-neon-pink/10 text-white' : 'border-cyber-blue/20 text-cyber-blue'}`}
+                  title={
+                    !voicesReady
+                      ? 'Loading voices...'
+                      : speechEnabled
+                      ? 'Mute voice'
+                      : 'Enable voice'
+                  }
+                  className={`relative w-9 h-9 rounded-xl border text-sm ${speechEnabled ? 'border-neon-pink bg-neon-pink/10 text-white' : 'border-cyber-blue/20 text-cyber-blue'}`}
                 >
                   {speechEnabled ? '🔊' : '🔇'}
+                  {!voicesReady && (
+                    <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-yellow-400 animate-pulse border border-black" />
+                  )}
                 </button>
               </div>
             </div>

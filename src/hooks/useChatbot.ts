@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { handleUserQuery, type ConversationContext, type NavigationAction, type QueryResponse } from '../utils/chatEngine';
-import { speakAdvanced } from '../utils/speakAdvanced';
-import { type LanguageMode } from '../utils/languageProcessor';
+import { detectLanguage, type LanguageMode } from '../utils/languageProcessor';
 import { playNotificationBeep } from '../utils/soundSystem';
 import { HIRE_CTA } from '../utils/jarvisPersonality';
+import { useVoice } from './useVoice';
 
 export interface ChatMessageType {
   id: string;
@@ -67,6 +67,7 @@ function isDoneTrigger(text: string): boolean {
 function getSpeechRecognitionLang(languageMode: LanguageMode): string {
   if (languageMode === 'hi') return 'hi-IN';
   if (languageMode === 'sv') return 'sv-SE';
+  if (languageMode === 'hinglish') return 'en-IN';
   return 'en-US';
 }
 
@@ -75,12 +76,13 @@ function makeId(role: string): string {
 }
 
 export function useChatbot() {
+  const { speak, cancel, speechEnabled, toggleSpeech, voicesReady } = useVoice();
+
   const [messages, setMessages] = useState<ChatMessageType[]>(loadMessages);
   const [languageMode, setLanguageMode] = useState<LanguageMode>('en');
   const [isOpen, setIsOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [listening, setListening] = useState(false);
-  const [speechEnabled, setSpeechEnabled] = useState(true);
   const [hasUnread, setHasUnread] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([
     'Show me your projects',
@@ -97,12 +99,10 @@ export function useChatbot() {
     lastResults: [],
     lastQuery: '',
   });
+  const languageModeRef = useRef<LanguageMode>('en');
   const recognitionRef = useRef<any>(null);
   const sendMessageRef = useRef<(text: string) => void>(() => {});
-  const speechEnabledRef = useRef(speechEnabled);
-  const languageModeRef = useRef(languageMode);
 
-  useEffect(() => { speechEnabledRef.current = speechEnabled; }, [speechEnabled]);
   useEffect(() => { languageModeRef.current = languageMode; }, [languageMode]);
 
   const supportsSpeechRecognition = useMemo(() => {
@@ -131,7 +131,7 @@ export function useChatbot() {
     recognition.lang = getSpeechRecognitionLang(languageMode);
 
     recognition.onresult = (event: any) => {
-      const transcript = event.results?.[0]?.[0]?.transcript;
+      const transcript: string = event.results?.[0]?.[0]?.transcript ?? '';
       if (transcript) sendMessageRef.current(transcript);
     };
     recognition.onerror = () => setListening(false);
@@ -140,6 +140,7 @@ export function useChatbot() {
     recognitionRef.current = recognition;
   }, []);
 
+  // Update recognition language when mode changes
   useEffect(() => {
     if (recognitionRef.current) {
       recognitionRef.current.lang = getSpeechRecognitionLang(languageMode);
@@ -167,125 +168,148 @@ export function useChatbot() {
     setHasUnread(true);
   }, []);
 
-  const executeWorkflowStep = useCallback((index: number) => {
-    const step = TOUR_STEPS[index];
-    setWorkflowIndex(index);
-    setIsTyping(true);
+  const executeWorkflowStep = useCallback(
+    (index: number) => {
+      const step = TOUR_STEPS[index];
+      setWorkflowIndex(index);
+      setIsTyping(true);
 
-    setTimeout(() => {
-      const ctx = conversationContextRef.current;
-      const result: QueryResponse = handleUserQuery(step.query, languageModeRef.current, ctx);
+      setTimeout(() => {
+        const ctx = conversationContextRef.current;
+        const lang = languageModeRef.current;
+        const result: QueryResponse = handleUserQuery(step.query, lang, ctx);
 
-      const isLast = index === TOUR_STEPS.length - 1;
-      const stepHeader = `[Step ${index + 1} of ${TOUR_STEPS.length}: ${step.label}]\n\n`;
-      const stepNote = isLast
-        ? "\n\nMy boss Pavan's complete portfolio tour is finished. All sections have been briefed."
-        : `\n\nMy boss Pavan's changes are ready. Please commit your code.\n\nSay 'done' to proceed to ${TOUR_STEPS[index + 1].label}.`;
+        const isLast = index === TOUR_STEPS.length - 1;
+        const stepHeader = `[Step ${index + 1} of ${TOUR_STEPS.length}: ${step.label}]\n\n`;
+        const stepNote = isLast
+          ? "\n\nMy boss Pavan's complete portfolio tour is finished. All sections have been briefed."
+          : `\n\nMy boss Pavan's changes are ready. Please commit your code.\n\nSay 'done' to proceed to ${TOUR_STEPS[index + 1].label}.`;
 
-      const fullText = stepHeader + result.response + stepNote;
+        const fullText = stepHeader + result.response + stepNote;
 
-      pushAssistantMessage(fullText);
-      setIsTyping(false);
-      setSuggestions(isLast ? ['Show me your projects', 'What skills do you have?', 'How can I contact you?'] : ['done', 'Tell me more', 'Show details']);
-      setLinks(result.links);
-      setWaitingForDone(!isLast);
-      if (isLast) setWorkflowIndex(-1);
+        pushAssistantMessage(fullText);
+        setIsTyping(false);
+        setSuggestions(
+          isLast
+            ? ['Show me your projects', 'What skills do you have?', 'How can I contact you?']
+            : ['done', 'Tell me more', 'Show details']
+        );
+        setLinks(result.links);
+        setWaitingForDone(!isLast);
+        if (isLast) setWorkflowIndex(-1);
 
-      playNotificationBeep();
+        playNotificationBeep();
+        speak(result.response + stepNote, result.emotion, lang);
 
-      if (speechEnabledRef.current) {
-        speakAdvanced(result.response + stepNote, result.emotion);
+        conversationContextRef.current = {
+          lastIntent: result.intent,
+          lastResults: result.results,
+          lastQuery: step.query,
+        };
+
+        if (result.action) navigateToSection(result.action);
+      }, 800);
+    },
+    [pushAssistantMessage, navigateToSection, speak]
+  );
+
+  const sendMessage = useCallback(
+    (text: string) => {
+      const trimmed = text.trim();
+      if (!trimmed) return;
+
+      // Auto-detect and apply language from user input
+      const detected = detectLanguage(trimmed);
+      if (detected !== languageModeRef.current) {
+        setLanguageMode(detected);
+        languageModeRef.current = detected;
+        if (recognitionRef.current) {
+          recognitionRef.current.lang = getSpeechRecognitionLang(detected);
+        }
       }
 
-      conversationContextRef.current = {
-        lastIntent: result.intent,
-        lastResults: result.results,
-        lastQuery: step.query,
+      const userMsg: ChatMessageType = {
+        id: makeId('user'),
+        role: 'user',
+        text: trimmed,
+        timestamp: Date.now(),
       };
+      setMessages((prev) => [...prev, userMsg]);
 
-      if (result.action) navigateToSection(result.action);
-    }, 800);
-  }, [pushAssistantMessage, navigateToSection]);
+      // Workflow: "done" trigger
+      if (waitingForDone && isDoneTrigger(trimmed)) {
+        setWaitingForDone(false);
+        const nextIndex = workflowIndex + 1;
+        const lang = languageModeRef.current;
 
-  const sendMessage = useCallback((text: string) => {
-    const trimmed = text.trim();
-    if (!trimmed) return;
-
-    const userMsg: ChatMessageType = {
-      id: makeId('user'),
-      role: 'user',
-      text: trimmed,
-      timestamp: Date.now(),
-    };
-    setMessages((prev) => [...prev, userMsg]);
-
-    // Workflow: "done" trigger
-    if (waitingForDone && isDoneTrigger(trimmed)) {
-      setWaitingForDone(false);
-      const nextIndex = workflowIndex + 1;
-
-      if (nextIndex >= TOUR_STEPS.length) {
-        const doneText = "My boss Pavan's complete portfolio tour is finished. All sections have been briefed.\n\n" + HIRE_CTA;
-        pushAssistantMessage(doneText);
-        setWorkflowIndex(-1);
-        if (speechEnabledRef.current) speakAdvanced(doneText, 'calm');
-      } else {
-        const continueText = "My boss Pavan's workflow is continuing as instructed.\n\n" + HIRE_CTA;
-        pushAssistantMessage(continueText);
-        if (speechEnabledRef.current) speakAdvanced(continueText, 'calm');
-        setTimeout(() => executeWorkflowStep(nextIndex), 900);
-      }
-      return;
-    }
-
-    // Tour trigger
-    if (isTourTrigger(trimmed)) {
-      const intro =
-        "My boss Pavan's portfolio tour is beginning. I will walk you through " +
-        TOUR_STEPS.length +
-        " key sections. Say 'done' after each one to proceed.\n\n" +
-        HIRE_CTA;
-      pushAssistantMessage(intro);
-      if (speechEnabledRef.current) speakAdvanced(intro, 'calm');
-      setTimeout(() => executeWorkflowStep(0), 1000);
-      return;
-    }
-
-    // Normal query
-    setIsTyping(true);
-    setTimeout(() => {
-      const ctx = conversationContextRef.current;
-      const result: QueryResponse = handleUserQuery(trimmed, languageModeRef.current, ctx);
-
-      pushAssistantMessage(result.response);
-      setIsTyping(false);
-      setSuggestions(result.suggestions);
-      setLinks(result.links);
-
-      if (speechEnabledRef.current) {
-        speakAdvanced(result.response, result.emotion);
+        if (nextIndex >= TOUR_STEPS.length) {
+          const doneText =
+            "My boss Pavan's complete portfolio tour is finished. All sections have been briefed.\n\n" + HIRE_CTA;
+          pushAssistantMessage(doneText);
+          setWorkflowIndex(-1);
+          speak(doneText, 'calm', lang);
+        } else {
+          const continueText =
+            "My boss Pavan's workflow is continuing as instructed.\n\n" + HIRE_CTA;
+          pushAssistantMessage(continueText);
+          speak(continueText, 'calm', lang);
+          setTimeout(() => executeWorkflowStep(nextIndex), 900);
+        }
+        return;
       }
 
-      if (result.action) navigateToSection(result.action);
+      // Tour trigger
+      if (isTourTrigger(trimmed)) {
+        const lang = languageModeRef.current;
+        const intro =
+          "My boss Pavan's portfolio tour is beginning. I will walk you through " +
+          TOUR_STEPS.length +
+          " key sections. Say 'done' after each one to proceed.\n\n" +
+          HIRE_CTA;
+        pushAssistantMessage(intro);
+        speak(intro, 'calm', lang);
+        setTimeout(() => executeWorkflowStep(0), 1000);
+        return;
+      }
 
-      conversationContextRef.current = {
-        lastIntent: result.intent,
-        lastResults: result.results,
-        lastQuery: trimmed,
-      };
-    }, 700);
-  }, [waitingForDone, workflowIndex, pushAssistantMessage, executeWorkflowStep, navigateToSection]);
+      // Normal query
+      setIsTyping(true);
+      setTimeout(() => {
+        const ctx = conversationContextRef.current;
+        const lang = languageModeRef.current;
+        const result: QueryResponse = handleUserQuery(trimmed, lang, ctx);
+
+        pushAssistantMessage(result.response);
+        setIsTyping(false);
+        setSuggestions(result.suggestions);
+        setLinks(result.links);
+
+        // Speech fires for every response — mandatory
+        speak(result.response, result.emotion, lang);
+
+        if (result.action) navigateToSection(result.action);
+
+        conversationContextRef.current = {
+          lastIntent: result.intent,
+          lastResults: result.results,
+          lastQuery: trimmed,
+        };
+      }, 700);
+    },
+    [waitingForDone, workflowIndex, pushAssistantMessage, executeWorkflowStep, navigateToSection, speak]
+  );
 
   useEffect(() => { sendMessageRef.current = sendMessage; }, [sendMessage]);
 
   const clearChat = useCallback(() => {
+    cancel();
     setMessages([{ ...welcomeMessage, id: makeId('welcome'), timestamp: Date.now() }]);
     setSuggestions(['Show me your projects', 'What skills do you have?', 'How can I contact you?', 'Give me a full tour']);
     setLinks([]);
     setWorkflowIndex(-1);
     setWaitingForDone(false);
     conversationContextRef.current = { lastIntent: 'general', lastResults: [], lastQuery: '' };
-  }, []);
+  }, [cancel]);
 
   const toggleListening = useCallback(() => {
     if (!recognitionRef.current) return;
@@ -303,7 +327,6 @@ export function useChatbot() {
   }, [listening]);
 
   const toggleOpen = useCallback(() => setIsOpen((v) => !v), []);
-  const toggleSpeech = useCallback(() => setSpeechEnabled((v) => !v), []);
 
   const workflowStatus: WorkflowStatus | null =
     workflowIndex >= 0
@@ -331,6 +354,7 @@ export function useChatbot() {
     toggleListening,
     speechEnabled,
     toggleSpeech,
+    voicesReady,
     suggestions,
     links,
     workflowStatus,
