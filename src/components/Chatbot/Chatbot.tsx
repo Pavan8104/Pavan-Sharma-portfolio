@@ -1,12 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { type FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { type FormEvent, useEffect, useRef, useState } from 'react';
 import ChatMessage from './ChatMessage';
-import { useChatbot } from '../../hooks/useChatbot';
+import { useChatContext } from '../../store/ChatContext';
 import { type LanguageMode } from '../../utils/languageProcessor';
-
-function formatTime(timestamp: number) {
-  return new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
+import { projects } from '../../data/projects';
 
 const languageLabels: Record<LanguageMode, string> = {
   en: 'English',
@@ -14,6 +11,20 @@ const languageLabels: Record<LanguageMode, string> = {
   sv: 'Swedish',
   hinglish: 'Hinglish',
 };
+
+interface FeaturedLink {
+  name: string;
+  url: string;
+  badge: string | null;
+}
+
+const FEATURED_LINKS: FeaturedLink[] = [
+  { name: 'HireOnix AI', url: 'https://hireonixai.com/', badge: 'PRIMARY' },
+  { name: 'HireOnix Presentation', url: 'https://hireonixai.com/student-partner/presentation', badge: null },
+  { name: 'Cloud Management App', url: 'https://cloudops-frontend-production.up.railway.app/login', badge: 'LIVE' },
+  { name: 'Docker Frontend', url: 'https://hub.docker.com/r/ps8104/cloudops-frontend', badge: null },
+  { name: 'Docker Backend', url: 'https://hub.docker.com/r/ps8104/cloudops-backend', badge: null },
+];
 
 export default function Chatbot() {
   const {
@@ -33,9 +44,11 @@ export default function Chatbot() {
     toggleSpeech,
     suggestions,
     links,
-  } = useChatbot();
+    workflowStatus,
+  } = useChatContext();
 
   const [draft, setDraft] = useState('');
+  const [projectsExpanded, setProjectsExpanded] = useState(false);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -50,16 +63,14 @@ export default function Chatbot() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [isOpen, toggleOpen]);
 
-  const welcome = useMemo(() => {
-    return `Ask me about projects, skills, experience, achievements, or contact information.`;
-  }, []);
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!draft.trim()) return;
     sendMessage(draft);
     setDraft('');
   };
+
+  const projectCount = projects.length;
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4">
@@ -69,85 +80,157 @@ export default function Chatbot() {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="w-[360px] sm:w-[420px] max-h-[calc(100vh-4rem)] cyber-glass border border-cyber-blue/30 backdrop-blur-xl shadow-neon overflow-hidden"
+            className="w-[360px] sm:w-[420px] max-h-[calc(100vh-4rem)] cyber-glass border border-cyber-blue/30 backdrop-blur-xl shadow-neon overflow-hidden flex flex-col"
           >
-            <div className="flex items-center justify-between px-4 py-4 border-b border-cyber-blue/20">
+            {/* Header */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-cyber-blue/20 shrink-0">
               <div>
-                <p className="text-xs text-cyber-blue-dim uppercase tracking-[0.25em]">JARVIS Assist</p>
-                <h3 className="text-lg font-cyber text-white">Portfolio AI Companion</h3>
+                <p className="text-[10px] text-cyber-blue-dim uppercase tracking-[0.25em]">JARVIS — Portfolio AI</p>
+                <h3 className="text-base font-cyber text-white leading-tight">My boss Pavan's Assistant</h3>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={clearChat}
                   title="Clear chat"
-                  className="w-9 h-9 rounded-full border border-cyber-blue/30 flex items-center justify-center text-cyber-blue hover:bg-red-500/10 hover:border-red-400 hover:text-red-400 transition-colors"
+                  className="w-8 h-8 rounded-full border border-cyber-blue/30 flex items-center justify-center text-cyber-blue hover:bg-red-500/10 hover:border-red-400 hover:text-red-400 transition-colors text-sm"
                 >
-                  🗑
+                  ✕
                 </button>
                 <button
                   type="button"
                   onClick={toggleOpen}
-                  className="w-9 h-9 rounded-full border border-cyber-blue/30 flex items-center justify-center text-cyber-blue hover:bg-cyber-blue/10"
+                  className="w-8 h-8 rounded-full border border-cyber-blue/30 flex items-center justify-center text-cyber-blue hover:bg-cyber-blue/10 text-lg"
                 >
                   ×
                 </button>
               </div>
             </div>
 
-            <div className="px-4 py-3 border-b border-cyber-blue/10">
+            {/* Controls row */}
+            <div className="px-4 py-2 border-b border-cyber-blue/10 shrink-0">
               <div className="flex items-center justify-between gap-2">
-                <div className="flex flex-col text-[11px] text-cyber-blue-dim">
-                  <span className="uppercase tracking-[0.16em]">Language</span>
-                  <span className="text-white text-sm">{languageLabels[languageMode]}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <select
-                    value={languageMode}
-                    onChange={(event) => setLanguageMode(event.target.value as LanguageMode)}
-                    className="bg-black/60 border border-cyber-blue/20 text-cyber-blue text-sm rounded-lg px-3 py-2 outline-none"
-                  >
-                    {Object.entries(languageLabels).map(([value, label]) => (
-                      <option key={value} value={value}>{label}</option>
-                    ))}
-                  </select>
-                  <button
-                    type="button"
-                    onClick={toggleSpeech}
-                    className={`w-11 h-11 rounded-xl border ${speechEnabled ? 'border-neon-pink bg-neon-pink/10 text-white shadow-neon-pink' : 'border-cyber-blue/20 text-cyber-blue'}`}
-                  >
-                    {speechEnabled ? '🔊' : '🔇'}
-                  </button>
-                </div>
+                <select
+                  value={languageMode}
+                  onChange={(e) => setLanguageMode(e.target.value as LanguageMode)}
+                  className="bg-black/60 border border-cyber-blue/20 text-cyber-blue text-xs rounded-lg px-2 py-1.5 outline-none"
+                >
+                  {Object.entries(languageLabels).map(([value, label]) => (
+                    <option key={value} value={value}>{label}</option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  onClick={toggleSpeech}
+                  title={speechEnabled ? 'Mute voice' : 'Enable voice'}
+                  className={`w-9 h-9 rounded-xl border text-sm ${speechEnabled ? 'border-neon-pink bg-neon-pink/10 text-white' : 'border-cyber-blue/20 text-cyber-blue'}`}
+                >
+                  {speechEnabled ? '🔊' : '🔇'}
+                </button>
               </div>
-              <p className="mt-3 text-[12px] text-cyber-blue-dim leading-5">{welcome}</p>
             </div>
 
-            <div className="flex flex-col gap-3 p-4 overflow-y-auto h-[380px]">
+            {/* Projects panel */}
+            <div className="border-b border-cyber-blue/10 shrink-0">
+              <button
+                type="button"
+                onClick={() => setProjectsExpanded((v) => !v)}
+                className="w-full flex items-center justify-between px-4 py-2 text-left hover:bg-cyber-blue/5 transition-colors"
+              >
+                <span className="text-[11px] text-cyber-blue uppercase tracking-[0.2em] font-cyber">
+                  {projectCount}+ Projects
+                </span>
+                <span className="text-cyber-blue-dim text-xs">{projectsExpanded ? '▲' : '▼'}</span>
+              </button>
+
+              <AnimatePresence>
+                {projectsExpanded && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-3 pb-3 grid gap-1.5">
+                      {FEATURED_LINKS.map((link) => (
+                        <a
+                          key={link.url}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between py-2 px-3 rounded-xl border border-cyber-blue/20 bg-black/60 text-cyber-blue text-xs hover:border-neon-pink hover:text-white hover:bg-neon-pink/10 transition group"
+                        >
+                          <span className="truncate">{link.name}</span>
+                          <div className="flex items-center gap-1.5 ml-2 shrink-0">
+                            {link.badge && (
+                              <span className="text-[9px] px-1.5 py-0.5 rounded border border-neon-pink/50 text-neon-pink uppercase tracking-wider">
+                                {link.badge}
+                              </span>
+                            )}
+                            <span className="opacity-40 group-hover:opacity-100 transition">↗</span>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Workflow status bar */}
+            {workflowStatus && (
+              <div className="px-4 py-2 border-b border-neon-pink/20 bg-neon-pink/5 shrink-0">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] text-neon-pink uppercase tracking-[0.2em]">
+                    Workflow: Step {workflowStatus.currentStep}/{workflowStatus.totalSteps}
+                    {workflowStatus.stepLabel ? ` — ${workflowStatus.stepLabel}` : ''}
+                  </span>
+                  {workflowStatus.waitingForDone && (
+                    <span className="text-[10px] text-cyber-blue-dim animate-pulse">say 'done' to continue</span>
+                  )}
+                </div>
+                <div className="mt-1.5 h-1 bg-cyber-blue/10 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-neon-pink rounded-full transition-all duration-500"
+                    style={{ width: `${(workflowStatus.currentStep / workflowStatus.totalSteps) * 100}%` }}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Messages */}
+            <div className="flex flex-col gap-3 p-4 overflow-y-auto flex-1 min-h-[200px] max-h-[320px]">
               {messages.map((message) => (
-                <ChatMessage key={message.id} role={message.role} text={message.text} timestamp={message.timestamp} />
+                <ChatMessage
+                  key={message.id}
+                  role={message.role}
+                  text={message.text}
+                  timestamp={message.timestamp}
+                />
               ))}
               {isTyping && (
                 <div className="self-start bg-white/5 border border-cyber-blue/40 rounded-3xl p-4 text-cyber-blue">
                   <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-cyber-blue animate-pulse" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-cyber-blue animate-pulse delay-150" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-cyber-blue animate-pulse delay-300" />
+                    <span className="h-2 w-2 rounded-full bg-cyber-blue animate-pulse" />
+                    <span className="h-2 w-2 rounded-full bg-cyber-blue animate-pulse delay-150" />
+                    <span className="h-2 w-2 rounded-full bg-cyber-blue animate-pulse delay-300" />
                   </div>
                 </div>
               )}
               <div ref={chatEndRef} />
             </div>
 
+            {/* Quick links from response */}
             {links.length > 0 && (
-              <div className="px-4 pb-2 pt-1 border-t border-cyber-blue/10 grid gap-2">
+              <div className="px-4 pb-2 pt-1 border-t border-cyber-blue/10 grid gap-1.5 shrink-0">
                 {links.map((link) => (
                   <a
                     key={link.url}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="py-2 px-3 rounded-2xl border border-cyber-blue/30 bg-black/60 text-cyber-blue text-sm hover:border-neon-pink hover:text-white hover:bg-neon-pink/10 transition"
+                    className="py-2 px-3 rounded-2xl border border-cyber-blue/30 bg-black/60 text-cyber-blue text-xs hover:border-neon-pink hover:text-white hover:bg-neon-pink/10 transition"
                   >
                     {link.label}
                   </a>
@@ -155,43 +238,45 @@ export default function Chatbot() {
               </div>
             )}
 
+            {/* Suggestions */}
             {suggestions.length > 0 && (
-              <div className="px-4 pb-2 pt-1 border-t border-cyber-blue/10">
-                <p className="text-[11px] text-cyber-blue-dim uppercase tracking-[0.2em] mb-2">Suggested questions</p>
-                <div className="flex flex-wrap gap-2">
-                  {suggestions.map((suggestion) => (
+              <div className="px-4 pb-2 pt-1 border-t border-cyber-blue/10 shrink-0">
+                <p className="text-[10px] text-cyber-blue-dim uppercase tracking-[0.2em] mb-1.5">Suggested</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {suggestions.map((s) => (
                     <button
-                      key={suggestion}
+                      key={s}
                       type="button"
-                      onClick={() => sendMessage(suggestion)}
-                      className="rounded-full border border-cyber-blue/20 bg-black/60 px-3 py-2 text-[11px] text-cyber-blue hover:border-neon-pink hover:text-white hover:bg-neon-pink/10 transition"
+                      onClick={() => sendMessage(s)}
+                      className="rounded-full border border-cyber-blue/20 bg-black/60 px-3 py-1.5 text-[11px] text-cyber-blue hover:border-neon-pink hover:text-white hover:bg-neon-pink/10 transition"
                     >
-                      {suggestion}
+                      {s}
                     </button>
                   ))}
                 </div>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="px-4 pb-4 pt-2">
-              <div className="relative flex items-center gap-3">
+            {/* Input */}
+            <form onSubmit={handleSubmit} className="px-4 pb-4 pt-2 shrink-0">
+              <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={supportsSpeechRecognition ? toggleListening : undefined}
-                  className={`w-12 h-12 rounded-3xl border ${listening ? 'border-neon-pink bg-neon-pink/15 text-neon-pink shadow-neon-pink' : 'border-cyber-blue/20 text-cyber-blue'} flex items-center justify-center transition-all`}
                   title={supportsSpeechRecognition ? 'Voice input' : 'Speech recognition unavailable'}
+                  className={`w-11 h-11 rounded-3xl border ${listening ? 'border-neon-pink bg-neon-pink/15 text-neon-pink shadow-neon-pink' : 'border-cyber-blue/20 text-cyber-blue'} flex items-center justify-center transition-all shrink-0`}
                 >
                   🎙
                 </button>
                 <input
                   value={draft}
-                  onChange={(event) => setDraft(event.target.value)}
-                  placeholder="Ask about projects, skills, or experience..."
-                  className="flex-1 bg-black/60 border border-cyber-blue/20 rounded-3xl px-4 py-3 text-sm text-white placeholder:text-cyber-blue-dim outline-none"
+                  onChange={(e) => setDraft(e.target.value)}
+                  placeholder={workflowStatus?.waitingForDone ? "Say 'done' to continue..." : 'Ask about projects, skills...'}
+                  className="flex-1 bg-black/60 border border-cyber-blue/20 rounded-3xl px-4 py-2.5 text-sm text-white placeholder:text-cyber-blue-dim outline-none"
                 />
                 <button
                   type="submit"
-                  className="w-12 h-12 rounded-3xl border border-neon-pink bg-neon-pink/15 text-white hover:bg-neon-pink/25 transition-all"
+                  className="w-11 h-11 rounded-3xl border border-neon-pink bg-neon-pink/15 text-white hover:bg-neon-pink/25 transition-all shrink-0"
                 >
                   ➤
                 </button>
@@ -201,13 +286,14 @@ export default function Chatbot() {
         )}
       </AnimatePresence>
 
+      {/* Launcher button */}
       <button
         type="button"
         onClick={toggleOpen}
         className="relative w-16 h-16 rounded-full bg-cyber-blue text-black flex items-center justify-center shadow-[0_0_30px_rgba(0,255,255,0.35)] border border-cyber-blue/50 hover:scale-105 transition-transform"
       >
         <span className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-fuchsia-500 opacity-20 blur-xl" />
-        <span className="relative text-2xl">J</span>
+        <span className="relative text-2xl font-cyber">J</span>
         {hasUnread && !isOpen && (
           <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full border-2 border-black animate-pulse" />
         )}

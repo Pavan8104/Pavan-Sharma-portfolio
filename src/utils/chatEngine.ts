@@ -6,6 +6,7 @@ import { achievements } from '../data/achievements';
 import { blogPosts } from '../data/blog';
 import { normalizeQuery, translateResponse, type LanguageMode } from './languageProcessor';
 import { detectEmotion, type Emotion } from './emotionVoice';
+import { applyJarvisPersonality } from './jarvisPersonality';
 
 export type Intent = 'projects' | 'skills' | 'experience' | 'contact' | 'achievements' | 'social' | 'certifications' | 'about' | 'general';
 
@@ -497,7 +498,8 @@ export function handleUserQuery(query: string, languageMode: LanguageMode, conte
   const intent = inferIntent(normalized);
   const results = searchKnowledgeBase(normalized);
   const { text, links } = buildResponse(intent, results, normalized, context);
-  const translated = translateResponse(text, languageMode);
+  const jarvisText = applyJarvisPersonality(text);
+  const translated = translateResponse(jarvisText, languageMode);
   const suggestions = getSuggestedQuestions(intent, results);
   const action = createNavigationAction(intent, normalized, results);
   const emotion = detectEmotion(text);

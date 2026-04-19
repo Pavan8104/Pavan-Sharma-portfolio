@@ -1,4 +1,5 @@
 import { useEffect, lazy, Suspense } from 'react';
+import { ChatProvider } from '../store/ChatContext';
 import { useAppStore } from '../stores/appStore';
 import BootScreen from './BootScreen';
 import Navbar from './Navbar';
@@ -104,9 +105,11 @@ export default function Layout() {
 
       {/* Chatbot assistant */}
       {booted && (
-        <Suspense fallback={null}>
-          <Chatbot />
-        </Suspense>
+        <ChatProvider>
+          <Suspense fallback={null}>
+            <Chatbot />
+          </Suspense>
+        </ChatProvider>
       )}
 
       {/* Scroll-to-top */}

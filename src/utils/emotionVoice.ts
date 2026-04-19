@@ -6,14 +6,16 @@ export function detectEmotion(text: string): Emotion {
   return 'calm';
 }
 
-export function applyEmotion(utterance: SpeechSynthesisUtterance, emotion: Emotion) {
-  utterance.pitch = 0;
+export function applyEmotion(utterance: SpeechSynthesisUtterance, emotion: Emotion): void {
   utterance.volume = 1;
   if (emotion === 'excited') {
+    utterance.pitch = 0.4;
     utterance.rate = 0.95;
   } else if (emotion === 'serious') {
-    utterance.rate = 0.7;
+    utterance.pitch = 0.25;
+    utterance.rate = 0.85;
   } else {
-    utterance.rate = 0.82;
+    utterance.pitch = 0.3;
+    utterance.rate = 0.9;
   }
 }
