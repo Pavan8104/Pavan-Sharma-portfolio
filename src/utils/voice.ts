@@ -15,7 +15,6 @@ const LANG_CODES: Record<LanguageMode, string> = {
   hinglish: 'en-IN',
 };
 
-// Ordered by preference per language — Google UK first for English as requested
 const VOICE_PREFS: Record<LanguageMode, string[]> = {
   en: [
     'Google UK English Male',
@@ -32,19 +31,21 @@ const VOICE_PREFS: Record<LanguageMode, string[]> = {
     'Lekha',
     'Hemant',
   ],
-  sv: [
-    'Google svenska',
-    'Microsoft Bengt Desktop',
-    'Alva',
-  ],
-  hinglish: [
-    'Google UK English Male',
-    'Microsoft David Desktop',
-    'David',
-  ],
+  sv: ['Google svenska', 'Microsoft Bengt Desktop', 'Alva'],
+  hinglish: ['Google UK English Male', 'Microsoft David Desktop', 'David'],
 };
 
 const voiceCache = new Map<LanguageMode, SpeechSynthesisVoice>();
+
+// Active resume interval to work around Chrome's pause bug
+let resumeTimer: ReturnType<typeof setInterval> | null = null;
+
+function clearResumeTimer(): void {
+  if (resumeTimer !== null) {
+    clearInterval(resumeTimer);
+    resumeTimer = null;
+  }
+}
 
 export function getVoices(): SpeechSynthesisVoice[] {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return [];
@@ -84,46 +85,56 @@ export function buildVoiceConfig(emotion: Emotion, languageMode: LanguageMode): 
   return { pitch: 0.3, rate: 0.9, volume: 1, lang };
 }
 
-function cleanForSpeech(text: string): string {
-  return text
-    // Strip workflow step headers like [Step 1 of 5: Projects]
-    .replace(/\[Step \d+ of \d+:[^\]]*\]/g, '')
-    // Strip markdown bold
-    .replace(/\*\*([^*]+)\*\*/g, '$1')
-    // Strip markdown links, keep label
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    // Strip heading markers
-    .replace(/#{1,6}\s/g, '')
-    // Collapse double newlines to a pause
-    .replace(/\n{2,}/g, '. ')
-    // Single newline to space
-    .replace(/\n/g, ' ')
-    // Expand contractions for robotic feel
-    .replace(/\bI'm\b/g, 'I am')
-    .replace(/\bI've\b/g, 'I have')
-    .replace(/\bI'll\b/g, 'I will')
-    .replace(/\bI'd\b/g, 'I would')
-    .replace(/\bdon't\b/g, 'do not')
-    .replace(/\bcan't\b/g, 'can not')
-    .replace(/\bwon't\b/g, 'will not')
-    .replace(/\byou're\b/g, 'you are')
-    .trim();
+function prepareForSpeech(text: string): string {
+  return (
+    text
+      // Strip the hire CTA — too long and repetitive for TTS
+      .replace(/Would you like to know more about my owner Pavan\?[\s\S]*/i, '')
+      // Strip workflow step headers [Step X of Y: Label]
+      .replace(/\[Step \d+ of \d+:[^\]]*\]/g, '')
+      // Strip markdown bold
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      // Strip markdown links, keep label text
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      // Strip heading markers
+      .replace(/#{1,6}\s/g, '')
+      // Double newline → sentence pause
+      .replace(/\n{2,}/g, '. ')
+      // Single newline → space
+      .replace(/\n/g, ' ')
+      // Expand contractions for robotic delivery
+      .replace(/\bI'm\b/g, 'I am')
+      .replace(/\bI've\b/g, 'I have')
+      .replace(/\bI'll\b/g, 'I will')
+      .replace(/\bI'd\b/g, 'I would')
+      .replace(/\bdon't\b/g, 'do not')
+      .replace(/\bcan't\b/g, 'can not')
+      .replace(/\bwon't\b/g, 'will not')
+      .replace(/\byou're\b/g, 'you are')
+      // Collapse extra spaces
+      .replace(/\s{2,}/g, ' ')
+      .trim()
+      // Hard cap at 300 characters to stay within Chrome's reliable TTS window
+      .slice(0, 300)
+  );
 }
 
 export function cancelSpeech(): void {
-  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-  }
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  clearResumeTimer();
+  window.speechSynthesis.cancel();
 }
 
 export function speak(text: string, emotion: Emotion, languageMode: LanguageMode): void {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
 
-  const cleaned = cleanForSpeech(text);
-  if (!cleaned) return;
+  const prepared = prepareForSpeech(text);
+  if (!prepared) return;
 
   const config = buildVoiceConfig(emotion, languageMode);
-  const utterance = new SpeechSynthesisUtterance(cleaned);
+
+  // Build utterance BEFORE cancel so Chrome doesn't lose the reference
+  const utterance = new SpeechSynthesisUtterance(prepared);
   utterance.pitch = config.pitch;
   utterance.rate = config.rate;
   utterance.volume = config.volume;
@@ -132,6 +143,27 @@ export function speak(text: string, emotion: Emotion, languageMode: LanguageMode
   const voice = resolveVoice(languageMode);
   if (voice) utterance.voice = voice;
 
+  // Chrome workaround: cancel existing speech, then yield one tick before speaking
+  // Calling speak() synchronously after cancel() is dropped silently in Chrome
   cancelSpeech();
-  window.speechSynthesis.speak(utterance);
+
+  utterance.onend = () => clearResumeTimer();
+  utterance.onerror = () => clearResumeTimer();
+
+  setTimeout(() => {
+    if (!('speechSynthesis' in window)) return;
+
+    window.speechSynthesis.speak(utterance);
+
+    // Chrome pause bug: speechSynthesis silently pauses after ~15s
+    // Keep it alive by resuming every 10 seconds while speaking
+    resumeTimer = setInterval(() => {
+      if (!window.speechSynthesis.speaking) {
+        clearResumeTimer();
+        return;
+      }
+      window.speechSynthesis.pause();
+      window.speechSynthesis.resume();
+    }, 10000);
+  }, 50);
 }
