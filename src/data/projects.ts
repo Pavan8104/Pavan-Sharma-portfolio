@@ -25,6 +25,15 @@ export const projects: Project[] = [
   },
   {
     id: '2',
+    title: 'HireOnix AI',
+    description: 'A top AI web platform showcasing live intelligent automation, smart workflows, and premium AI-driven demos.',
+    tags: ['AI', 'Web', 'Automation'],
+    live: 'https://hireonixai.com/',
+    featured: true,
+    domain: 'AI / RAG',
+  },
+  {
+    id: '3',
     title: 'Sentinel AI: LLM Red Teaming Framework',
     description: 'A human-centric AI safety system designed to evaluate and improve the robustness of Large Language Models (LLMs) through adversarial attacks, alignment checks, and safety mechanisms.',
     tags: ['Python', 'AI/ML', 'Security', 'LLM'],

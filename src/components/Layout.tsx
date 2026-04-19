@@ -17,6 +17,7 @@ import ContactSection from './Contact/ContactSection';
 import StatsCounter from './effects/StatsCounter';
 
 const StarfieldBackground = lazy(() => import('./effects/StarfieldBackground'));
+const Chatbot = lazy(() => import('./Chatbot/Chatbot'));
 
 export default function Layout() {
   const { booted, showAbout, scrollLocked, setBoot, setShowAbout, setScrollLocked } =
@@ -101,11 +102,18 @@ export default function Layout() {
       {/* About overlay */}
       <AboutSection isVisible={showAbout} onEscape={handleEscape} />
 
+      {/* Chatbot assistant */}
+      {booted && (
+        <Suspense fallback={null}>
+          <Chatbot />
+        </Suspense>
+      )}
+
       {/* Scroll-to-top */}
       {booted && !showAbout && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 z-30 w-10 h-10 cyber-glass rounded-full flex items-center justify-center text-cyber-blue hover:text-neon-pink hover:shadow-neon transition-all"
+          className="fixed bottom-6 right-24 z-30 w-10 h-10 cyber-glass rounded-full flex items-center justify-center text-cyber-blue hover:text-neon-pink hover:shadow-neon transition-all"
         >
           ↑
         </button>
