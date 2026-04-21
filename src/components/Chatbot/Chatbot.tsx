@@ -79,7 +79,7 @@ export default function Chatbot() {
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="w-[360px] sm:w-[420px] max-h-[calc(100vh-4rem)] cyber-glass border border-cyber-blue/30 backdrop-blur-xl shadow-neon overflow-hidden flex flex-col"
+            className="w-[min(calc(100vw-2rem),420px)] max-h-[calc(100vh-4rem)] cyber-glass border border-cyber-blue/30 backdrop-blur-xl shadow-neon overflow-hidden flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-cyber-blue/20 shrink-0">
