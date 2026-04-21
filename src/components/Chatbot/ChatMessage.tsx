@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 
 interface ChatMessageProps {
@@ -6,7 +7,7 @@ interface ChatMessageProps {
   timestamp?: number;
 }
 
-export default function ChatMessage({ role, text, timestamp }: ChatMessageProps) {
+function ChatMessage({ role, text, timestamp }: ChatMessageProps) {
   const isAssistant = role === 'assistant';
   const time = timestamp ? new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : null;
   return (
@@ -24,3 +25,5 @@ export default function ChatMessage({ role, text, timestamp }: ChatMessageProps)
     </motion.div>
   );
 }
+
+export default memo(ChatMessage);
