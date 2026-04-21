@@ -94,7 +94,7 @@ export default function Chatbot() {
                   type="button"
                   onClick={clearChat}
                   aria-label="Clear chat history"
-                  className="w-8 h-8 rounded-full border border-cyber-blue/30 flex items-center justify-center text-cyber-blue hover:bg-red-500/10 hover:border-red-400 hover:text-red-400 transition-colors text-sm"
+                  className="w-11 h-11 rounded-full border border-cyber-blue/30 flex items-center justify-center text-cyber-blue hover:bg-red-500/10 hover:border-red-400 hover:text-red-400 transition-colors text-sm"
                 >
                   ✕
                 </button>
@@ -102,7 +102,7 @@ export default function Chatbot() {
                   type="button"
                   onClick={toggleOpen}
                   aria-label="Close assistant"
-                  className="w-8 h-8 rounded-full border border-cyber-blue/30 flex items-center justify-center text-cyber-blue hover:bg-cyber-blue/10 text-lg"
+                  className="w-11 h-11 rounded-full border border-cyber-blue/30 flex items-center justify-center text-cyber-blue hover:bg-cyber-blue/10 text-lg"
                 >
                   ×
                 </button>
@@ -121,7 +121,7 @@ export default function Chatbot() {
                     onChange={(e) => setLanguageMode(e.target.value as LanguageMode)}
                     aria-label="Select Assistant Language"
                     title="Language auto-detected from input — override here"
-                    className="bg-black/60 border border-cyber-blue/20 text-cyber-blue text-xs rounded-lg px-2 py-1.5 outline-none"
+                    className="bg-black/60 border border-cyber-blue/20 text-cyber-blue text-xs rounded-lg px-2 py-2 outline-none"
                   >
                     {Object.entries(languageLabels).map(([value, label]) => (
                       <option key={value} value={value}>{label}</option>
@@ -140,7 +140,7 @@ export default function Chatbot() {
                       ? 'Mute voice'
                       : 'Enable voice'
                   }
-                  className={`relative w-9 h-9 rounded-xl border text-sm ${speechEnabled ? 'border-neon-pink bg-neon-pink/10 text-white' : 'border-cyber-blue/20 text-cyber-blue'}`}
+                  className={`relative w-11 h-11 rounded-xl border text-sm ${speechEnabled ? 'border-neon-pink bg-neon-pink/10 text-white' : 'border-cyber-blue/20 text-cyber-blue'}`}
                 >
                   {speechEnabled ? '🔊' : '🔇'}
                   {!voicesReady && (
