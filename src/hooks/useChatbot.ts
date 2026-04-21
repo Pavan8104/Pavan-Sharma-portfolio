@@ -138,6 +138,13 @@ export function useChatbot() {
     recognition.onend = () => setListening(false);
 
     recognitionRef.current = recognition;
+
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+        recognitionRef.current = null;
+      }
+    };
   }, []);
 
   // Update recognition language when mode changes
