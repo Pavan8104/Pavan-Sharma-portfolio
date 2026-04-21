@@ -19,7 +19,7 @@ export const projects: Project[] = [
     title: 'CloudOps Platform',
     description: 'A cloud management platform for deployment, monitoring, and DevOps workflows.',
     tags: ['DevOps', 'Cloud', 'Docker', 'React'],
-    live: 'https://cloudops-frontend-production.up.railway.app/login',
+    live: 'https://cloudops-frontend-production.up.railway.app/dashboard',
     extraLinks: [
       { label: 'Frontend Docker', url: 'https://hub.docker.com/r/ps8104/cloudops-frontend' },
       { label: 'Backend Docker', url: 'https://hub.docker.com/r/ps8104/cloudops-backend' },
