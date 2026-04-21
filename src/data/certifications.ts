@@ -17,7 +17,7 @@ export const certifications: Certification[] = [
     id: 'cert-2',
     category: 'Cybersecurity',
     title: 'Foundations of Cybersecurity',
-    link: 'https://www.linkedin.com/',
+    link: 'https://www.linkedin.com/posts/pavan-sharma-1645ab276_cybersecurity-professionaldevelopment-googlecertification-activity-7146803114833043456-mJIY?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdERwBzBNT4Sfdin3sXvG4oMBMPST9UWs',
   },
 
   // Programming & Development
