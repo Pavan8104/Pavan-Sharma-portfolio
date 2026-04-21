@@ -80,6 +80,8 @@ export default function Chatbot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             className="w-[min(calc(100vw-2rem),420px)] max-h-[calc(100vh-4rem)] cyber-glass border border-cyber-blue/30 backdrop-blur-xl shadow-neon overflow-hidden flex flex-col"
+            role="dialog"
+            aria-label="JARVIS AI Assistant"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-cyber-blue/20 shrink-0">
@@ -91,7 +93,7 @@ export default function Chatbot() {
                 <button
                   type="button"
                   onClick={clearChat}
-                  title="Clear chat"
+                  aria-label="Clear chat history"
                   className="w-8 h-8 rounded-full border border-cyber-blue/30 flex items-center justify-center text-cyber-blue hover:bg-red-500/10 hover:border-red-400 hover:text-red-400 transition-colors text-sm"
                 >
                   ✕
@@ -99,6 +101,7 @@ export default function Chatbot() {
                 <button
                   type="button"
                   onClick={toggleOpen}
+                  aria-label="Close assistant"
                   className="w-8 h-8 rounded-full border border-cyber-blue/30 flex items-center justify-center text-cyber-blue hover:bg-cyber-blue/10 text-lg"
                 >
                   ×
@@ -116,6 +119,7 @@ export default function Chatbot() {
                   <select
                     value={languageMode}
                     onChange={(e) => setLanguageMode(e.target.value as LanguageMode)}
+                    aria-label="Select Assistant Language"
                     title="Language auto-detected from input — override here"
                     className="bg-black/60 border border-cyber-blue/20 text-cyber-blue text-xs rounded-lg px-2 py-1.5 outline-none"
                   >
@@ -127,6 +131,8 @@ export default function Chatbot() {
                 <button
                   type="button"
                   onClick={toggleSpeech}
+                  aria-label={speechEnabled ? 'Mute voice' : 'Enable voice'}
+                  aria-pressed={speechEnabled}
                   title={
                     !voicesReady
                       ? 'Loading voices...'
@@ -149,6 +155,8 @@ export default function Chatbot() {
               <button
                 type="button"
                 onClick={() => setProjectsExpanded((v) => !v)}
+                aria-expanded={projectsExpanded}
+                aria-controls="featured-links-panel"
                 className="w-full flex items-center justify-between px-4 py-2 text-left hover:bg-cyber-blue/5 transition-colors"
               >
                 <span className="text-[11px] text-cyber-blue uppercase tracking-[0.2em] font-cyber">
@@ -160,19 +168,21 @@ export default function Chatbot() {
               <AnimatePresence>
                 {projectsExpanded && (
                   <motion.div
+                    id="featured-links-panel"
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-3 pb-3 grid gap-1.5">
+                    <div className="px-3 pb-3 grid gap-1.5" role="list">
                       {FEATURED_LINKS.map((link) => (
                         <a
                           key={link.url}
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
+                          role="listitem"
                           className="flex items-center justify-between py-2 px-3 rounded-xl border border-cyber-blue/20 bg-black/60 text-cyber-blue text-xs hover:border-neon-pink hover:text-white hover:bg-neon-pink/10 transition group"
                         >
                           <span className="truncate">{link.name}</span>
@@ -182,7 +192,7 @@ export default function Chatbot() {
                                 {link.badge}
                               </span>
                             )}
-                            <span className="opacity-40 group-hover:opacity-100 transition">↗</span>
+                            <span className="opacity-40 group-hover:opacity-100 transition" aria-hidden="true">↗</span>
                           </div>
                         </a>
                       ))}
@@ -194,7 +204,7 @@ export default function Chatbot() {
 
             {/* Workflow status bar */}
             {workflowStatus && (
-              <div className="px-4 py-2 border-b border-neon-pink/20 bg-neon-pink/5 shrink-0">
+              <div className="px-4 py-2 border-b border-neon-pink/20 bg-neon-pink/5 shrink-0" role="status" aria-live="polite">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] text-neon-pink uppercase tracking-[0.2em]">
                     Workflow: Step {workflowStatus.currentStep}/{workflowStatus.totalSteps}
@@ -214,7 +224,12 @@ export default function Chatbot() {
             )}
 
             {/* Messages */}
-            <div className="flex flex-col gap-3 p-4 overflow-y-auto flex-1 min-h-[200px] max-h-[320px]">
+            <div 
+              className="flex flex-col gap-3 p-4 overflow-y-auto flex-1 min-h-[200px] max-h-[320px]"
+              role="log"
+              aria-live="polite"
+              aria-label="Conversation history"
+            >
               {messages.map((message) => (
                 <ChatMessage
                   key={message.id}
@@ -224,7 +239,7 @@ export default function Chatbot() {
                 />
               ))}
               {isTyping && (
-                <div className="self-start bg-white/5 border border-cyber-blue/40 rounded-3xl p-4 text-cyber-blue">
+                <div className="self-start bg-white/5 border border-cyber-blue/40 rounded-3xl p-4 text-cyber-blue" aria-label="Assistant is typing">
                   <div className="flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-cyber-blue animate-pulse" />
                     <span className="h-2 w-2 rounded-full bg-cyber-blue animate-pulse delay-150" />
@@ -237,7 +252,7 @@ export default function Chatbot() {
 
             {/* Quick links from response */}
             {links.length > 0 && (
-              <div className="px-4 pb-2 pt-1 border-t border-cyber-blue/10 grid gap-1.5 shrink-0">
+              <div className="px-4 pb-2 pt-1 border-t border-cyber-blue/10 grid gap-1.5 shrink-0" role="navigation" aria-label="Quick links">
                 {links.map((link) => (
                   <a
                     key={link.url}
@@ -256,7 +271,7 @@ export default function Chatbot() {
             {suggestions.length > 0 && (
               <div className="px-4 pb-2 pt-1 border-t border-cyber-blue/10 shrink-0">
                 <p className="text-[10px] text-cyber-blue-dim uppercase tracking-[0.2em] mb-1.5">Suggested</p>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1.5" role="group" aria-label="Quick replies">
                   {suggestions.map((s) => (
                     <button
                       key={s}
@@ -277,6 +292,8 @@ export default function Chatbot() {
                 <button
                   type="button"
                   onClick={supportsSpeechRecognition ? toggleListening : undefined}
+                  aria-label={listening ? 'Stop voice input' : 'Start voice input'}
+                  aria-pressed={listening}
                   title={supportsSpeechRecognition ? 'Voice input' : 'Speech recognition unavailable'}
                   className={`w-11 h-11 rounded-3xl border ${listening ? 'border-neon-pink bg-neon-pink/15 text-neon-pink shadow-neon-pink' : 'border-cyber-blue/20 text-cyber-blue'} flex items-center justify-center transition-all shrink-0`}
                 >
@@ -285,11 +302,13 @@ export default function Chatbot() {
                 <input
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
+                  aria-label="Message Assistant"
                   placeholder={workflowStatus?.waitingForDone ? "Say 'done' to continue..." : 'Ask about projects, skills...'}
                   className="flex-1 bg-black/60 border border-cyber-blue/20 rounded-3xl px-4 py-2.5 text-sm text-white placeholder:text-cyber-blue-dim outline-none"
                 />
                 <button
                   type="submit"
+                  aria-label="Send message"
                   className="w-11 h-11 rounded-3xl border border-neon-pink bg-neon-pink/15 text-white hover:bg-neon-pink/25 transition-all shrink-0"
                 >
                   ➤
@@ -304,12 +323,15 @@ export default function Chatbot() {
       <button
         type="button"
         onClick={toggleOpen}
+        aria-label="Toggle JARVIS AI Assistant"
+        aria-expanded={isOpen}
+        role="switch"
         className="relative w-16 h-16 rounded-full bg-cyber-blue text-black flex items-center justify-center shadow-[0_0_30px_rgba(0,255,255,0.35)] border border-cyber-blue/50 hover:scale-105 transition-transform"
       >
-        <span className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-fuchsia-500 opacity-20 blur-xl" />
+        <span className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-fuchsia-500 opacity-20 blur-xl" aria-hidden="true" />
         <span className="relative text-2xl font-cyber">J</span>
         {hasUnread && !isOpen && (
-          <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full border-2 border-black animate-pulse" />
+          <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 rounded-full border-2 border-black animate-pulse" aria-label="New messages available" />
         )}
       </button>
     </div>
