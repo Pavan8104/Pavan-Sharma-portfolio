@@ -32,6 +32,10 @@ export function useVoice() {
     window.speechSynthesis.onvoiceschanged = () => {
       warmVoiceCache();
       setVoicesReady(true);
+      // Pre-warm the TTS engine with a silent utterance
+      if (enabledRef.current) {
+        speakCore('\u200B', 'calm', 'en');
+      }
     };
 
     // Cleanup: restore previous handler if any
