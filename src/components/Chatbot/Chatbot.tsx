@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { type FormEvent, useEffect, useRef, useState } from 'react';
+import { type FormEvent, useEffect, useRef, useState, useMemo } from 'react';
 import ChatMessage from './ChatMessage';
 import { useChatContext } from '../../store/ChatContext';
 import { type LanguageMode } from '../../utils/languageProcessor';
@@ -44,11 +44,17 @@ export default function Chatbot() {
     suggestions,
     links,
     workflowStatus,
+    preserveHistory,
+    setPreserveHistory,
   } = useChatContext();
 
   const [draft, setDraft] = useState('');
   const [projectsExpanded, setProjectsExpanded] = useState(false);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
+
+  const memoizedMessages = useMemo(() => messages, [messages]);
+  const memoizedSuggestions = useMemo(() => suggestions, [suggestions]);
+  const memoizedLinks = useMemo(() => links, [links]);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -128,20 +134,34 @@ export default function Chatbot() {
                     ))}
                   </select>
                 </div>
-                <button
-                  type="button"
-                  onClick={toggleSpeech}
-                  aria-label={speechEnabled ? 'Mute voice' : 'Enable voice'}
-                  aria-pressed={speechEnabled}
-                  title={
-                    !voicesReady
-                      ? 'Loading voices...'
-                      : speechEnabled
-                      ? 'Mute voice'
-                      : 'Enable voice'
-                  }
-                  className={`relative w-11 h-11 rounded-xl border text-sm ${speechEnabled ? 'border-neon-pink bg-neon-pink/10 text-white' : 'border-cyber-blue/20 text-cyber-blue'}`}
-                >
+                <div className="flex items-center gap-3">
+                  <div className="flex flex-col items-end gap-0.5">
+                    <span className="text-[9px] text-cyber-blue-dim uppercase tracking-wider px-1">
+                      History
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setPreserveHistory(!preserveHistory)}
+                      aria-label={preserveHistory ? 'Preserve history enabled' : 'Preserve history disabled'}
+                      className={`text-[10px] px-2 py-1 rounded border ${preserveHistory ? 'border-neon-pink text-neon-pink bg-neon-pink/10' : 'border-cyber-blue/20 text-cyber-blue/60'}`}
+                    >
+                      {preserveHistory ? 'ON' : 'OFF'}
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={toggleSpeech}
+                    aria-label={speechEnabled ? 'Mute voice' : 'Enable voice'}
+                    aria-pressed={speechEnabled}
+                    title={
+                      !voicesReady
+                        ? 'Loading voices...'
+                        : speechEnabled
+                        ? 'Mute voice'
+                        : 'Enable voice'
+                    }
+                    className={`relative w-11 h-11 rounded-xl border text-sm ${speechEnabled ? 'border-neon-pink bg-neon-pink/10 text-white' : 'border-cyber-blue/20 text-cyber-blue'}`}
+                  >
                   {speechEnabled ? '🔊' : '🔇'}
                   {!voicesReady && (
                     <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-yellow-400 animate-pulse border border-black" />
@@ -149,6 +169,7 @@ export default function Chatbot() {
                 </button>
               </div>
             </div>
+          </div>
 
             {/* Projects panel */}
             <div className="border-b border-cyber-blue/10 shrink-0">
@@ -230,7 +251,7 @@ export default function Chatbot() {
               aria-live="polite"
               aria-label="Conversation history"
             >
-              {messages.map((message) => (
+              {memoizedMessages.map((message) => (
                 <ChatMessage
                   key={message.id}
                   role={message.role}
@@ -251,9 +272,9 @@ export default function Chatbot() {
             </div>
 
             {/* Quick links from response */}
-            {links.length > 0 && (
+            {memoizedLinks.length > 0 && (
               <div className="px-4 pb-2 pt-1 border-t border-cyber-blue/10 grid gap-1.5 shrink-0" role="navigation" aria-label="Quick links">
-                {links.map((link) => (
+                {memoizedLinks.map((link) => (
                   <a
                     key={link.url}
                     href={link.url}
@@ -268,11 +289,11 @@ export default function Chatbot() {
             )}
 
             {/* Suggestions */}
-            {suggestions.length > 0 && (
+            {memoizedSuggestions.length > 0 && (
               <div className="px-4 pb-2 pt-1 border-t border-cyber-blue/10 shrink-0">
                 <p className="text-[10px] text-cyber-blue-dim uppercase tracking-[0.2em] mb-1.5">Suggested</p>
                 <div className="flex flex-wrap gap-1.5" role="group" aria-label="Quick replies">
-                  {suggestions.map((s) => (
+                  {memoizedSuggestions.map((s) => (
                     <button
                       key={s}
                       type="button"

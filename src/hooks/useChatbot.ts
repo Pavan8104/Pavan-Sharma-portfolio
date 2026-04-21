@@ -93,6 +93,7 @@ export function useChatbot() {
   const [links, setLinks] = useState<{ label: string; url: string }[]>([]);
   const [workflowIndex, setWorkflowIndex] = useState(-1);
   const [waitingForDone, setWaitingForDone] = useState(false);
+  const [preserveHistory, setPreserveHistory] = useState(false);
 
   const conversationContextRef = useRef<ConversationContext>({
     lastIntent: 'general',
@@ -190,7 +191,7 @@ export function useChatbot() {
         const stepHeader = `[Step ${index + 1} of ${TOUR_STEPS.length}: ${step.label}]\n\n`;
         const stepNote = isLast
           ? "\n\nMy boss Pavan's complete portfolio tour is finished. All sections have been briefed."
-          : `\n\nMy boss Pavan's changes are ready. Please commit your code.\n\nSay 'done' to proceed to ${TOUR_STEPS[index + 1].label}.`;
+          : `\n\nSay 'done' to proceed to ${TOUR_STEPS[index + 1].label}.`;
 
         const fullText = stepHeader + result.response + stepNote;
 
@@ -367,8 +368,7 @@ export function useChatbot() {
     suggestions,
     links,
     workflowStatus,
-  };
-}
-tus,
+    preserveHistory,
+    setPreserveHistory,
   };
 }
