@@ -21,9 +21,7 @@ interface FeaturedLink {
 const FEATURED_LINKS: FeaturedLink[] = [
   { name: 'HireOnix AI', url: 'https://hireonixai.com/', badge: 'PRIMARY' },
   { name: 'HireOnix Presentation', url: 'https://hireonixai.com/student-partner/presentation', badge: null },
-  { name: 'Cloud Management App', url: 'https://cloudops-frontend-production.up.railway.app/login', badge: 'LIVE' },
-  { name: 'Docker Frontend', url: 'https://hub.docker.com/r/ps8104/cloudops-frontend', badge: null },
-  { name: 'Docker Backend', url: 'https://hub.docker.com/r/ps8104/cloudops-backend', badge: null },
+  { name: 'Docker Profile', url: 'https://hub.docker.com/u/ps8104', badge: 'DEVOPS' },
 ];
 
 export default function Chatbot() {
