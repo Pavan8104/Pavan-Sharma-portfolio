@@ -310,13 +310,15 @@ export function useChatbot() {
 
   const clearChat = useCallback(() => {
     cancel();
-    setMessages([{ ...welcomeMessage, id: makeId('welcome'), timestamp: Date.now() }]);
+    if (!preserveHistory) {
+      setMessages([{ ...welcomeMessage, id: makeId('welcome'), timestamp: Date.now() }]);
+    }
     setSuggestions(['Show me your projects', 'What skills do you have?', 'How can I contact you?', 'Give me a full tour']);
     setLinks([]);
     setWorkflowIndex(-1);
     setWaitingForDone(false);
     conversationContextRef.current = { lastIntent: 'general', lastResults: [], lastQuery: '' };
-  }, [cancel]);
+  }, [cancel, preserveHistory]);
 
   const toggleListening = useCallback(() => {
     if (!recognitionRef.current) return;
@@ -365,5 +367,8 @@ export function useChatbot() {
     suggestions,
     links,
     workflowStatus,
+  };
+}
+tus,
   };
 }
