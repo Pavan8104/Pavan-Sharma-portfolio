@@ -11,7 +11,7 @@ export const certifications: Certification[] = [
     id: 'cert-1',
     category: 'Cybersecurity',
     title: 'Play It Safe: Manage Security Risks from Google',
-    link: 'https://www.linkedin.com/',
+    link: 'https://www.linkedin.com/posts/pavan-sharma-1645ab276_im-happy-to-share-that-ive-obtained-a-new-activity-7158538606255501312-51C8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdERwBzBNT4Sfdin3sXvG4oMBMPST9UWs',
   },
   {
     id: 'cert-2',
