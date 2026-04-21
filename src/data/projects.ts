@@ -14,19 +14,17 @@ export interface Project {
 
 export const projects: Project[] = [
   // FEATURED PROJECTS (TOP 4)
-{
-    id: '1',
-    title: 'CloudOPS Cloud Management Platform',
-    description: 'Cloud internal management system with AI assistance.',
-    tags: ['React', 'Python', 'Docker', 'Railway', 'AI'],
-    github: 'https://github.com/Pavan8104/CloudOpsdashboard',
+  {
+    id: '15',
+    title: 'CloudOps Platform',
+    description: 'A cloud management platform for deployment, monitoring, and DevOps workflows.',
+    tags: ['DevOps', 'Cloud', 'Docker', 'React'],
     live: 'https://cloudops-frontend-production.up.railway.app/login',
     extraLinks: [
       { label: 'Frontend Docker', url: 'https://hub.docker.com/r/ps8104/cloudops-frontend' },
-      { label: 'Backend Docker', url: 'https://hub.docker.com/r/ps8104/cloudops-backend' }
+      { label: 'Backend Docker', url: 'https://hub.docker.com/r/ps8104/cloudops-backend' },
     ],
-    featured: true,
-    domain: 'Data Science',
+    domain: 'Frontend',
   },
 
   {

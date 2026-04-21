@@ -116,7 +116,7 @@ export default function ProjectCard({ project, index, featured = false, onClick 
           </button>
         )}
         {project.live && (
-          <button 
+          <button
             className="cyber-button-pink px-6 py-2.5 text-xs w-[60%] flex items-center justify-center gap-2 tracking-widest uppercase font-cyber"
             onClick={(e) => !blast?.active && handleNavigate(e, project.live!)}
             onTouchStart={(e) => !blast?.active && handleNavigate(e, project.live!)}
@@ -124,6 +124,16 @@ export default function ProjectCard({ project, index, featured = false, onClick 
             ▸ Live Demo
           </button>
         )}
+        {project.extraLinks?.map((link) => (
+          <button
+            key={link.url}
+            className="cyber-button px-6 py-2.5 text-xs w-[60%] flex items-center justify-center gap-2"
+            onClick={(e) => !blast?.active && handleNavigate(e, link.url)}
+            onTouchStart={(e) => !blast?.active && handleNavigate(e, link.url)}
+          >
+            ▸ {link.label}
+          </button>
+        ))}
       </div>
 
       {/* Cinematic Blast Effect */}
