@@ -31,7 +31,7 @@ export const certifications: Certification[] = [
     id: 'cert-4',
     category: 'Programming & Development',
     title: 'IIT Madras Reverse Coding X',
-    link: 'https://www.linkedin.com/',
+    link: 'https://www.linkedin.com/posts/pavan-sharma-1645ab276_reversecodingx-solocoder-iitmadras-activity-7153786341107924992-iaCm?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdERwBzBNT4Sfdin3sXvG4oMBMPST9UWs',
   },
 
   // Design Thinking & Innovation
@@ -51,7 +51,7 @@ export const certifications: Certification[] = [
     id: 'cert-7',
     category: 'Design Thinking & Innovation',
     title: 'Critical Thinking Mindset',
-    link: 'https://www.linkedin.com/',
+    link: 'https://www.linkedin.com/posts/pavan-sharma-1645ab276_certificate-of-completion-activity-7121027663175008257-0y_o?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdERwBzBNT4Sfdin3sXvG4oMBMPST9UWs',
   },
 
   // Achievements & Competitions
