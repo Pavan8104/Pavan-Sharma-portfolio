@@ -25,7 +25,7 @@ export const certifications: Certification[] = [
     id: 'cert-3',
     category: 'Programming & Development',
     title: 'Web Designing Certification (Chandigarh University)',
-    link: 'https://www.linkedin.com/',
+    link: 'https://www.linkedin.com/posts/pavan-sharma-1645ab276_greetings-for-all-activity-7094561949845221377-lF3Q?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdERwBzBNT4Sfdin3sXvG4oMBMPST9UWs',
   },
   {
     id: 'cert-4',
@@ -38,8 +38,8 @@ export const certifications: Certification[] = [
   {
     id: 'cert-5',
     category: 'Design Thinking & Innovation',
-    title: 'Design Thinking and Creativity in Business & Tech',
-    link: 'https://www.linkedin.com/',
+    title: 'Design Thinking and Creativity in Business & Tech and 54+ certifications from Linkedin',
+    link: 'https://www.linkedin.com/posts/pavan-sharma-1645ab276_radhey-radhey-very-happy-to-share-activity-7121114126059237377-rd1e?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdERwBzBNT4Sfdin3sXvG4oMBMPST9UWs',
   },
   {
     id: 'cert-6',
@@ -59,7 +59,7 @@ export const certifications: Certification[] = [
     id: 'cert-8',
     category: 'Achievements & Competitions',
     title: 'CSI eSuraksha Hackathon (Top 10 Teams)',
-    link: 'https://www.linkedin.com/',
+    link: 'https://www.linkedin.com/posts/pavan-sharma-1645ab276_techenthusiast-codingchallenge-cybersecurity-activity-7144689529268887552-IUfQ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdERwBzBNT4Sfdin3sXvG4oMBMPST9UWs',
   },
 
   // Cloud & Data
