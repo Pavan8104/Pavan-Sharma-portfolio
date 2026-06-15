@@ -12,6 +12,17 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: 'exp-1',
+    role: 'Forward Learner',
+    company: 'MC Kisney',
+    period: 'Present',
+    description: 'Developing the Gen AI skills and Worked on analyzing platform data and deriving insights. Collaborated in team-based problem solving with a focus on structured thinking and real-world applications.',
+    tech: ['Python', 'AI', 'Problem Solving'],
+    type: 'work',
+    linkedin: 'https://www.linkedin.com/posts/pavan-sharma-1645ab276_mckinsey-futureofwork-careerdevelopment-ugcPost-7454619342379450368-FPtm?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdERwBzBNT4Sfdin3sXvG4oMBMPST9UWs',
+  },
+
+  {
+    id: 'exp-1',
     role: 'Solution Architect Intern',
     company: 'Hireonix AI',
     period: 'Present',

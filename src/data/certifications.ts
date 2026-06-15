@@ -45,7 +45,7 @@ export const certifications: Certification[] = [
     id: 'cert-6',
     category: 'Design Thinking & Innovation',
     title: 'Learning Design Thinking',
-    link: 'https://www.linkedin.com/',
+    link: 'https://www.linkedin.com/posts/pavan-sharma-1645ab276_certificate-of-completion-activity-7118102576604024832-IS6X?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdERwBzBNT4Sfdin3sXvG4oMBMPST9UWs',
   },
   {
     id: 'cert-7',
