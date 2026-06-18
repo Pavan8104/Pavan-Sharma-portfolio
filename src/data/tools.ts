@@ -14,7 +14,7 @@ export const toolCategories: SkillCategory[] = [
     subcategories: [
       {
         title: 'Generative AI',
-        skills: ['RAG (Retrieval-Augmented Generation)', 'Agentic Workflows', 'Prompt Engineering', 'LangChain']
+        skills: ['Python','RAG (Retrieval-Augmented Generation)', 'Agentic Workflows (Playwright and n8n)', 'Prompt Engineering', 'LangChain' , 'LangGraph']
       },
       {
         title: 'AI Safety & Evaluation',

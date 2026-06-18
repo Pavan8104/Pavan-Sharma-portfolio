@@ -12,6 +12,28 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: 'exp-1',
+    role: 'Software Engineer intern',
+    company: 'micro1',
+    period: 'Present',
+    description: 'Developing the AI agents that are used in real world and Worked on analyzing real world problem and deriving insights. Collaborated in team-based problem solving with a focus on structured thinking and real-world applications.',
+    tech: ['Python','Agentic AI', 'AI', 'Problem Solving'],
+    type: 'work',
+    linkedin: 'https://www.linkedin.com/posts/pavan-sharma-1645ab276_softwareengineering-backend-generativeai-activity-7460626538040827904-P2-Q?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdERwBzBNT4Sfdin3sXvG4oMBMPST9UWs',
+  },
+
+  {
+    id: 'exp-1',
+    role: 'Coding expert and Aether generalist',
+    company: 'Outlier',
+    period: 'Present',
+    description: 'Developing the AI agents that are used in real world and Worked on analyzing real world problem and deriving insights. Collaborated in team-based problem solving with a focus on structured thinking and real-world applications.',
+    tech: ['Python','Agentic AI', 'AI', 'Problem Solving'],
+    type: 'work',
+    linkedin: 'https://www.linkedin.com/posts/pavan-sharma-1645ab276_softwareengineering-backend-generativeai-activity-7460626538040827904-P2-Q?utm_source=share&utm_medium=member_desktop&rcm=ACoAAENdERwBzBNT4Sfdin3sXvG4oMBMPST9UWs',
+  },
+  
+  {
+    id: 'exp-1',
     role: 'Forward Learner',
     company: 'MC Kisney',
     period: 'Present',

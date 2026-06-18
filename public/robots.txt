@@ -1,0 +1,75 @@
+# robots.txt — Pavan Sharma Portfolio
+# https://pavansharmaportfolio.in
+
+# ─── General Crawlers ───────────────────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /dist/
+Disallow: /.env
+
+# ─── Google ─────────────────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# ─── Bing / Microsoft / Copilot ─────────────────────────────────────────────
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# ─── AI / LLM Crawlers ──────────────────────────────────────────────────────
+
+# OpenAI — ChatGPT, ChatGPT Search, OpenAI Search
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic — Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google — Gemini, Bard, Search Generative Experience
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl (used by AI training datasets)
+User-agent: CCBot
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# ─── Sitemap ────────────────────────────────────────────────────────────────
+Sitemap: https://pavansharmaportfolio.in/sitemap.xml
