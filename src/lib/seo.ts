@@ -10,7 +10,7 @@ export const PERSON = {
   email: 'ps3297169@gmail.com',
   github: 'https://github.com/Pavan8104',
   linkedin: 'https://www.linkedin.com/in/pavan-sharma-1645ab276/',
-  image: `${SITE_URL}/og-image.png`,
+  image: `${SITE_URL}/og-image.jpg`,
   description:
     'Pavan Sharma is an AI Agent Developer and Full Stack Engineer helping global businesses build AI agents, automation systems, RAG pipelines, SaaS products, MVPs, and modern web applications. Experienced with Python, FastAPI, LangChain, LangGraph, OpenAI APIs, React, and Next.js.',
 } as const;
@@ -61,7 +61,7 @@ export function buildMetadata({
       locale: 'en_US',
       images: [
         {
-          url: `${SITE_URL}/og-image.png`,
+          url: `${SITE_URL}/og-image.jpg`,
           width: 1200,
           height: 630,
           alt: imageAlt,
@@ -80,7 +80,7 @@ export function buildMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [`${SITE_URL}/og-image.png`],
+      images: [`${SITE_URL}/og-image.jpg`],
     },
   };
 }

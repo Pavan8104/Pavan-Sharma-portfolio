@@ -1,0 +1,436 @@
+export interface ServiceFaq {
+  question: string;
+  answer: string;
+}
+
+export interface Service {
+  slug: string;
+  /** Keyword-focused H1 */
+  title: string;
+  /** Short label for cards/nav */
+  shortTitle: string;
+  metaTitle: string;
+  metaDescription: string;
+  serviceType: string;
+  icon: string;
+  /** One-paragraph positioning intro */
+  intro: string;
+  /** The business problem this service solves */
+  problem: string;
+  /** How Pavan solves it */
+  solution: string;
+  techStack: string[];
+  deliverables: string[];
+  faqs: ServiceFaq[];
+  /** Project titles from src/data/projects.ts shown as proof */
+  relatedProjectTitles: string[];
+  relatedBlogSlugs: string[];
+  relatedServiceSlugs: string[];
+}
+
+export const services: Service[] = [
+  {
+    slug: 'ai-agent-development',
+    title: 'AI Agent Development Services',
+    shortTitle: 'AI Agents',
+    metaTitle: 'AI Agent Developer — Hire Pavan Sharma to Build AI Agents',
+    metaDescription:
+      'Hire an AI agent developer to build autonomous agents that plan, use tools, and self-correct. LangGraph, LangChain, and OpenAI API expertise for businesses in the USA, UK, Canada, Australia, Europe, and UAE.',
+    serviceType: 'AI Agent Development',
+    icon: '🤖',
+    intro:
+      'I design and build AI agents that go beyond chat — autonomous systems that plan multi-step work, call your tools and APIs, verify their own output, and complete real business tasks. I develop AI agents professionally at micro1 and build agentic workflows with LangGraph and n8n.',
+    problem:
+      'Most businesses use AI as a fancy autocomplete. The real value appears when AI can execute processes end-to-end — researching, deciding, calling systems, and reporting back — without a human driving every step. Building that reliably is hard: naive agents loop forever, hallucinate tool inputs, and fail silently.',
+    solution:
+      'I build production-grade agents with explicit state machines (LangGraph), constrained tool schemas, retry and self-correction loops, and observability baked in. Every agent ships with guardrails: input validation, output checks, cost limits, and fallbacks — informed by my LLM red-teaming background (Sentinel AI).',
+    techStack: ['Python', 'LangGraph', 'LangChain', 'OpenAI API', 'FastAPI', 'n8n', 'PostgreSQL', 'Docker'],
+    deliverables: [
+      'Agent architecture design (state graph, tools, memory)',
+      'Custom tool/API integrations for your systems',
+      'Guardrails, evaluation suite, and cost controls',
+      'FastAPI backend with documented endpoints',
+      'Deployment (Docker/AWS) and handover documentation',
+    ],
+    faqs: [
+      {
+        question: 'What can an AI agent actually do for my business?',
+        answer:
+          'An AI agent can execute multi-step processes autonomously: qualify and respond to leads, triage support tickets, research and summarize information, keep systems in sync, or run internal workflows that currently need manual effort. Anything with clear inputs, tools, and success criteria is a candidate.',
+      },
+      {
+        question: 'Which frameworks do you use for AI agent development?',
+        answer:
+          'Primarily LangGraph and LangChain in Python with the OpenAI API (or Claude/Gemini where they fit better), orchestrated behind a FastAPI backend. For business-process automation I also combine agents with n8n workflows.',
+      },
+      {
+        question: 'How do you keep agents from hallucinating or misbehaving?',
+        answer:
+          'I built Sentinel AI, an LLM red-teaming framework, so safety is a first-class part of my process: constrained tool schemas, output validation, bounded loops, human-approval gates for sensitive actions, and evaluation suites that test the agent against adversarial inputs before launch.',
+      },
+      {
+        question: 'Do you work with international clients?',
+        answer:
+          'Yes — I work remotely with clients in the USA, UK, Canada, Australia, Europe, UAE, and worldwide, with overlap-friendly communication and async updates.',
+      },
+    ],
+    relatedProjectTitles: ['Sentinel AI: LLM Red Teaming Framework', 'HireOnix AI'],
+    relatedBlogSlugs: ['agentic-ai-langgraph-n8n', 'llm-red-teaming-sentinel-ai'],
+    relatedServiceSlugs: ['ai-automation', 'llm-development', 'ai-chatbot-development'],
+  },
+  {
+    slug: 'ai-automation',
+    title: 'AI Automation Services for Business',
+    shortTitle: 'AI Automation',
+    metaTitle: 'AI Automation Developer — Automate Business Workflows with AI',
+    metaDescription:
+      'Hire an AI automation developer to eliminate repetitive work. Custom AI workflow automation with n8n, LangChain, Python, and OpenAI API for startups and businesses worldwide.',
+    serviceType: 'AI Workflow Automation',
+    icon: '⚙️',
+    intro:
+      'I automate the repetitive work that eats your team\'s week — document processing, data entry, reporting, lead handling, content pipelines — by combining LLMs with workflow engines like n8n and custom Python services.',
+    problem:
+      'Teams lose hours daily to copy-paste work between tools: reading emails, updating spreadsheets, moving data between CRM, docs, and dashboards. Traditional automation breaks the moment input isn\'t perfectly structured; that\'s exactly where AI-powered automation shines.',
+    solution:
+      'I map your workflow, identify the steps where an LLM adds judgment (classification, extraction, summarization, drafting), and wire them into a reliable pipeline with n8n or custom FastAPI services — with human review gates where the cost of an error is high, and logging so you can audit every run.',
+    techStack: ['Python', 'n8n', 'LangChain', 'OpenAI API', 'FastAPI', 'PostgreSQL', 'Docker', 'AWS Lambda'],
+    deliverables: [
+      'Workflow audit and automation plan',
+      'Working automation pipelines (n8n / Python)',
+      'LLM prompts, extraction schemas, and evaluation checks',
+      'Integration with your existing tools (email, CRM, sheets, APIs)',
+      'Monitoring, error alerts, and documentation',
+    ],
+    faqs: [
+      {
+        question: 'Which business processes are best suited for AI automation?',
+        answer:
+          'High-volume, rule-plus-judgment tasks: processing inbound emails and documents, extracting data from unstructured text, generating reports, qualifying leads, drafting responses, and syncing information between systems. If a task follows a pattern but needs light human judgment, it can usually be automated with AI.',
+      },
+      {
+        question: 'Do I need to replace my existing tools?',
+        answer:
+          'No. I build automations around the tools you already use — email, Google Sheets, Notion, CRMs, databases, internal APIs — connecting them with n8n or lightweight Python services.',
+      },
+      {
+        question: 'How do you make sure the automation doesn\'t make costly mistakes?',
+        answer:
+          'Critical steps get human-approval gates, validation rules, and confidence thresholds. Every run is logged. I test with real historical data before switching anything to fully automatic.',
+      },
+    ],
+    relatedProjectTitles: ['HireOnix AI', 'Web Traffic Analyzer'],
+    relatedBlogSlugs: ['agentic-ai-langgraph-n8n'],
+    relatedServiceSlugs: ['ai-agent-development', 'ai-chatbot-development', 'saas-development'],
+  },
+  {
+    slug: 'ai-chatbot-development',
+    title: 'AI Chatbot Development Services',
+    shortTitle: 'AI Chatbots',
+    metaTitle: 'AI Chatbot Developer — Custom Chatbots for Websites & Support',
+    metaDescription:
+      'Hire an AI chatbot developer to build custom chatbots for support, sales, and internal knowledge. RAG-powered, multilingual, voice-enabled chatbots built with Python, LangChain, and OpenAI API.',
+    serviceType: 'AI Chatbot Development',
+    icon: '💬',
+    intro:
+      'I build chatbots that actually know your business — grounded in your documents with RAG, matched to your brand voice, and able to hand off to humans when needed. The JARVIS assistant on this site (multilingual, voice-enabled) is one I built from scratch.',
+    problem:
+      'Generic chatbot widgets frustrate users with canned answers and hallucinate when asked anything specific. Businesses need assistants that answer from their real docs and data, capture leads, and escalate gracefully — without leaking wrong information.',
+    solution:
+      'I build custom chatbots grounded in your content via RAG (LangChain + a vector database), with intent handling, conversation memory, lead capture, and analytics. Optional voice input/output and multilingual support — my own assistant handles English, Hindi, and Hinglish.',
+    techStack: ['Python', 'LangChain', 'OpenAI API', 'ChromaDB', 'Pinecone', 'FastAPI', 'React', 'Web Speech API'],
+    deliverables: [
+      'Custom chatbot UI matching your brand (web widget or full page)',
+      'RAG pipeline over your docs, FAQs, and site content',
+      'Conversation memory, intent routing, and human handoff',
+      'Admin view of conversations and lead capture',
+      'Deployment, monitoring, and prompt/knowledge updates guide',
+    ],
+    faqs: [
+      {
+        question: 'Can the chatbot answer questions from my own documents?',
+        answer:
+          'Yes — that\'s the core of it. I index your documents, help pages, and internal knowledge into a vector database and use retrieval-augmented generation so the bot answers with your actual content and cites where answers came from.',
+      },
+      {
+        question: 'Can you build multilingual or voice-enabled chatbots?',
+        answer:
+          'Yes. I\'ve built a production assistant with voice input (speech recognition), spoken responses, and automatic language detection across English, Hindi, Hinglish, and Swedish.',
+      },
+      {
+        question: 'What does an AI chatbot project cost and how long does it take?',
+        answer:
+          'A focused MVP chatbot (single knowledge source, web widget) typically takes 1–3 weeks. Scope grows with integrations, channels, and knowledge complexity — I\'ll give you a fixed quote after a short discovery call.',
+      },
+    ],
+    relatedProjectTitles: ['HireOnix AI', 'Sentinel AI: LLM Red Teaming Framework'],
+    relatedBlogSlugs: ['building-production-rag-pipelines', 'agentic-ai-langgraph-n8n'],
+    relatedServiceSlugs: ['rag-development', 'ai-agent-development', 'web-development'],
+  },
+  {
+    slug: 'rag-development',
+    title: 'RAG Development Services (Retrieval-Augmented Generation)',
+    shortTitle: 'RAG Systems',
+    metaTitle: 'RAG Developer — Production Retrieval-Augmented Generation Systems',
+    metaDescription:
+      'Hire a RAG developer to build production retrieval-augmented generation pipelines. LangChain, ChromaDB, Pinecone, embeddings, chunking, and evaluation — AI that answers from your data.',
+    serviceType: 'RAG Pipeline Development',
+    icon: '📚',
+    intro:
+      'I build production RAG systems — the difference between a demo that impresses and a pipeline that answers correctly at scale. Chunking strategy, embedding choice, retrieval quality, reranking, and evaluation are where RAG succeeds or fails, and it\'s where I focus.',
+    problem:
+      'LLMs don\'t know your data, and fine-tuning is expensive and stale the moment your docs change. Naive RAG (split text, embed, top-k) works in demos and falls apart on real questions: wrong chunks retrieved, context windows wasted, answers that sound right but aren\'t grounded.',
+    solution:
+      'I design RAG pipelines around your actual corpus: structure-aware chunking, hybrid retrieval where needed, metadata filtering, reranking, and grounded prompting with citations. Every build includes a retrieval evaluation set so quality is measured, not guessed.',
+    techStack: ['Python', 'LangChain', 'ChromaDB', 'Pinecone', 'OpenAI API', 'FastAPI', 'PostgreSQL', 'Docker'],
+    deliverables: [
+      'Corpus analysis and chunking/embedding strategy',
+      'Ingestion pipeline with incremental updates',
+      'Retrieval + generation API (FastAPI) with citations',
+      'Evaluation harness (retrieval accuracy, answer groundedness)',
+      'Deployment and knowledge-update runbook',
+    ],
+    faqs: [
+      {
+        question: 'What is RAG and when do I need it?',
+        answer:
+          'Retrieval-Augmented Generation lets an LLM answer using your documents: the system retrieves the most relevant content and the model generates an answer grounded in it. You need RAG when answers must reflect your knowledge base, product docs, policies, or any data the model was never trained on.',
+      },
+      {
+        question: 'Which vector database do you recommend?',
+        answer:
+          'It depends on scale and hosting: ChromaDB is excellent for self-hosted and mid-size corpora; Pinecone for managed scale; pgvector when you want everything inside PostgreSQL. I\'ve worked with all three and will recommend based on your constraints, not fashion.',
+      },
+      {
+        question: 'How do you measure RAG quality?',
+        answer:
+          'With an evaluation set built from real user questions: retrieval hit-rate, answer groundedness against sources, and regression tests that run before any prompt or index change ships. I wrote about this in my production RAG article.',
+      },
+    ],
+    relatedProjectTitles: ['Sentinel AI: LLM Red Teaming Framework', 'HireOnix AI'],
+    relatedBlogSlugs: ['building-production-rag-pipelines', 'llm-red-teaming-sentinel-ai'],
+    relatedServiceSlugs: ['ai-chatbot-development', 'llm-development', 'ai-agent-development'],
+  },
+  {
+    slug: 'llm-development',
+    title: 'LLM Application Development Services',
+    shortTitle: 'LLM Apps',
+    metaTitle: 'LLM Developer — OpenAI API & Custom LLM Application Development',
+    metaDescription:
+      'Hire an LLM developer for custom large language model applications: OpenAI API integration, prompt engineering, evaluation, red teaming, and safe production deployment.',
+    serviceType: 'LLM Application Development',
+    icon: '🧠',
+    intro:
+      'I build applications on top of large language models — OpenAI, Claude, Gemini — from API integration and prompt systems to evaluation and safety testing. My red-teaming framework, Sentinel AI, means I know how LLMs fail, which is exactly what you need from the person building with them.',
+    problem:
+      'Shipping an LLM feature is easy; shipping one that\'s reliable, safe, affordable, and doesn\'t embarrass your brand is not. Teams struggle with prompt fragility, hallucinations, token costs, and no way to tell whether a change made things better or worse.',
+    solution:
+      'I build LLM features with versioned prompt systems, structured outputs, automatic validation, cost tracking, and evaluation suites. Where safety matters, I adversarially test the system before launch — prompt injection, jailbreaks, data leakage — using techniques from my LLM red-teaming work.',
+    techStack: ['Python', 'OpenAI API', 'LangChain', 'FastAPI', 'PostgreSQL', 'Docker', 'AWS'],
+    deliverables: [
+      'LLM feature design and model selection',
+      'Prompt system with structured outputs and validation',
+      'Evaluation suite and regression tests',
+      'Safety/red-team review for user-facing features',
+      'Production API with cost monitoring',
+    ],
+    faqs: [
+      {
+        question: 'Which LLM should my product use?',
+        answer:
+          'It depends on the task, latency, and budget — GPT models for broad capability, Claude for long-context and careful reasoning, smaller models where cost dominates. I benchmark candidates on your actual data before committing, and design so you can switch providers later.',
+      },
+      {
+        question: 'What is LLM red teaming and do I need it?',
+        answer:
+          'Red teaming is adversarial testing: deliberately attacking your LLM feature with prompt injection, jailbreaks, and edge cases to find failures before users do. If your LLM feature is user-facing or touches sensitive data, you need at least a basic red-team pass — it\'s a specialty of mine (Sentinel AI).',
+      },
+      {
+        question: 'Can you fix or improve an existing LLM feature?',
+        answer:
+          'Yes — audits are often the fastest win: I review prompts, retrieval, costs, and failure logs, then deliver a prioritized fix list with measured before/after quality.',
+      },
+    ],
+    relatedProjectTitles: ['Sentinel AI: LLM Red Teaming Framework'],
+    relatedBlogSlugs: ['llm-red-teaming-sentinel-ai', 'building-production-rag-pipelines'],
+    relatedServiceSlugs: ['rag-development', 'ai-agent-development', 'ai-chatbot-development'],
+  },
+  {
+    slug: 'full-stack-development',
+    title: 'Full Stack Development Services',
+    shortTitle: 'Full Stack',
+    metaTitle: 'Full Stack Developer — React, Next.js, Python & FastAPI',
+    metaDescription:
+      'Hire a full stack developer for end-to-end product builds: React and Next.js frontends, Python FastAPI backends, PostgreSQL, Docker, and AWS deployment.',
+    serviceType: 'Full Stack Development',
+    icon: '🛠️',
+    intro:
+      'I build complete products end-to-end: React/Next.js frontends, Python FastAPI backends, PostgreSQL or MongoDB data layers, and Dockerized deployment to AWS. One developer, the whole stack, no coordination overhead.',
+    problem:
+      'Hiring separate frontend and backend developers for a small product means slower delivery, integration friction, and higher cost. Many projects stall at the seams — the API the frontend needed was never built, or the UI can\'t express what the backend does.',
+    solution:
+      'I own the full slice: data model, API design, UI, auth, deployment. You get one accountable person, consistent architecture, and working software every week — with clean handover docs if your in-house team takes over later.',
+    techStack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Python', 'FastAPI', 'PostgreSQL', 'MongoDB', 'Docker', 'AWS'],
+    deliverables: [
+      'Architecture and data model design',
+      'Responsive frontend (React/Next.js + Tailwind)',
+      'REST API backend (FastAPI) with docs',
+      'Auth, roles, and integrations',
+      'Dockerized deployment + CI-friendly setup',
+    ],
+    faqs: [
+      {
+        question: 'What stack do you use for full stack projects?',
+        answer:
+          'React or Next.js with TypeScript and Tailwind on the frontend; Python FastAPI on the backend; PostgreSQL or MongoDB for data; Docker for packaging; AWS (EC2, S3, Lambda) for hosting. I pick the simplest architecture that serves the product.',
+      },
+      {
+        question: 'Can you take over an existing codebase?',
+        answer:
+          'Yes. I start with a code audit, stabilize the riskiest parts, and then ship improvements incrementally — no big-bang rewrites unless the code genuinely demands it.',
+      },
+      {
+        question: 'Do you also handle deployment and DevOps?',
+        answer:
+          'Yes — Dockerized builds, AWS deployment, domains/SSL, monitoring basics, and documentation. My CloudOps project is exactly this discipline turned into a product.',
+      },
+    ],
+    relatedProjectTitles: ['CloudOps Platform', 'HireOnix AI', 'Finance Analytics Backend'],
+    relatedBlogSlugs: ['aws-solution-architect-real-lessons', 'data-science-workflow-raw-data-to-deployed-model'],
+    relatedServiceSlugs: ['saas-development', 'web-development', 'mvp-development'],
+  },
+  {
+    slug: 'web-development',
+    title: 'Website Development Services',
+    shortTitle: 'Web Development',
+    metaTitle: 'Website Development Services — Fast, Modern, SEO-Ready Sites',
+    metaDescription:
+      'Professional website development with Next.js, React, and Tailwind CSS: fast, mobile-responsive, SEO-optimized business websites, landing pages, and web apps.',
+    serviceType: 'Website Development',
+    icon: '🌐',
+    intro:
+      'I build fast, modern, SEO-ready websites with Next.js and Tailwind CSS — from high-converting landing pages to full business sites and interactive web apps. This portfolio, with its custom 3D and animation work, is built and optimized by me.',
+    problem:
+      'Slow template sites lose visitors and rank poorly. Businesses need sites that load instantly, look sharp on every device, communicate clearly, and are structured so both Google and AI search engines can understand and recommend them.',
+    solution:
+      'I build with Next.js static generation for speed, semantic HTML and structured data for search visibility, and careful performance work (Core Web Vitals) — plus the design polish and interactive touches that make a site memorable rather than generic.',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Three.js', 'Vercel/AWS/Docker'],
+    deliverables: [
+      'Custom responsive website (no bloated templates)',
+      'On-page SEO: metadata, structured data, sitemap',
+      'Performance optimization (Core Web Vitals)',
+      'Contact forms, analytics, and integrations',
+      'Deployment + easy content-update workflow',
+    ],
+    faqs: [
+      {
+        question: 'How long does a website project take?',
+        answer:
+          'A landing page: about a week. A multi-page business site: 2–4 weeks depending on content readiness and integrations. You get a working preview link early and iterate from there.',
+      },
+      {
+        question: 'Will my website be SEO-optimized?',
+        answer:
+          'Yes — semantic HTML, per-page metadata, Open Graph, JSON-LD structured data, sitemap, fast load times, and mobile-first layout are standard in every build, plus optimization for AI search engines (ChatGPT, Perplexity, Google AI Overview).',
+      },
+      {
+        question: 'Can you add custom animations or 3D elements?',
+        answer:
+          'Yes — Framer Motion animation systems and Three.js 3D scenes are a specialty. This portfolio\'s starfield, holographic shader, and interactive effects are all custom-built.',
+      },
+    ],
+    relatedProjectTitles: ['Portfolio Website', 'HireOnix AI', 'CloudOps Platform'],
+    relatedBlogSlugs: ['aws-solution-architect-real-lessons'],
+    relatedServiceSlugs: ['full-stack-development', 'mvp-development', 'saas-development'],
+  },
+  {
+    slug: 'saas-development',
+    title: 'SaaS Development Services',
+    shortTitle: 'SaaS Products',
+    metaTitle: 'SaaS Developer — Build Your SaaS Product from Idea to Launch',
+    metaDescription:
+      'Hire a SaaS developer to build your product: multi-tenant architecture, auth, billing, dashboards, and AI features. Next.js + FastAPI SaaS development for founders worldwide.',
+    serviceType: 'SaaS Product Development',
+    icon: '📦',
+    intro:
+      'I build SaaS products from zero to launch: multi-tenant data models, authentication, subscription billing, admin dashboards, and — increasingly the differentiator — built-in AI features like assistants, automation, and smart search.',
+    problem:
+      'Founders burn months and budgets on SaaS builds that stall: over-engineered architecture, missing billing edge cases, no path from prototype to production. Meanwhile the market window narrows.',
+    solution:
+      'I ship a focused v1 fast: proven stack (Next.js + FastAPI + PostgreSQL), clean tenant model, Stripe billing, and the one or two features that make your product worth paying for — often an AI capability competitors don\'t have. Then we iterate on real user feedback.',
+    techStack: ['Next.js', 'TypeScript', 'Python', 'FastAPI', 'PostgreSQL', 'Stripe', 'Docker', 'AWS', 'OpenAI API'],
+    deliverables: [
+      'SaaS architecture (multi-tenancy, auth, roles)',
+      'Subscription billing integration',
+      'Core product features + admin dashboard',
+      'AI features where they add real value',
+      'Production deployment with monitoring and docs',
+    ],
+    faqs: [
+      {
+        question: 'How much does it cost to build a SaaS MVP?',
+        answer:
+          'It depends entirely on scope — a focused single-feature SaaS is dramatically cheaper than a platform. After a discovery call I\'ll propose a scoped v1 with a fixed quote, and a roadmap for what comes after launch.',
+      },
+      {
+        question: 'Can you add AI features to an existing SaaS?',
+        answer:
+          'Yes — RAG-powered search over customer data, AI assistants, document processing, and workflow automation are the most common additions I build into existing products.',
+      },
+      {
+        question: 'Who owns the code?',
+        answer:
+          'You do — full source code, infrastructure access, and documentation are handed over. No lock-in.',
+      },
+    ],
+    relatedProjectTitles: ['HireOnix AI', 'CloudOps Platform', 'Finance Analytics Backend'],
+    relatedBlogSlugs: ['building-production-rag-pipelines', 'aws-solution-architect-real-lessons'],
+    relatedServiceSlugs: ['mvp-development', 'full-stack-development', 'ai-agent-development'],
+  },
+  {
+    slug: 'mvp-development',
+    title: 'MVP Development Services for Startups',
+    shortTitle: 'MVP Development',
+    metaTitle: 'MVP Developer — Launch Your Startup MVP in Weeks',
+    metaDescription:
+      'Hire an MVP developer to turn your startup idea into a working product in weeks. Lean scope, modern stack (Next.js, FastAPI), and AI features that make your demo stand out.',
+    serviceType: 'MVP Development',
+    icon: '🚀',
+    intro:
+      'I turn startup ideas into working products in weeks, not months — a lean, demo-ready MVP that you can put in front of users and investors, built on a stack that won\'t need throwing away when you grow.',
+    problem:
+      'Startups die waiting for their first version. Agencies quote months and inflate scope; no-code tools hit walls exactly when investors ask about your tech. Founders need a real product, fast, without betting the whole runway.',
+    solution:
+      'We cut scope to the single workflow that proves your idea, then I build it properly: real auth, real data, deployable code. Weekly demos keep you in control. AI features (assistant, automation, smart processing) are often the fastest way to make an MVP feel like magic — and they\'re my specialty.',
+    techStack: ['Next.js', 'React', 'Python', 'FastAPI', 'PostgreSQL', 'OpenAI API', 'Docker', 'AWS'],
+    deliverables: [
+      'Scope definition: the one workflow that proves the idea',
+      'Working MVP with real auth and data',
+      'AI feature integration where it strengthens the pitch',
+      'Deployed product with a shareable demo link',
+      'Codebase + docs ready for your future team',
+    ],
+    faqs: [
+      {
+        question: 'How fast can you build an MVP?',
+        answer:
+          'A focused MVP — one core workflow, auth, and a clean UI — typically takes 2–6 weeks. The biggest factor is scope discipline, which I\'ll help you enforce.',
+      },
+      {
+        question: 'Will the MVP scale if my startup takes off?',
+        answer:
+          'The stack (Next.js, FastAPI, PostgreSQL, Docker) is the same one used at scale by serious companies. You may rewrite features as you learn, but you won\'t have to rewrite the foundation.',
+      },
+      {
+        question: 'Can you sign an NDA?',
+        answer: 'Yes — happy to sign an NDA before you share your idea and requirements.',
+      },
+    ],
+    relatedProjectTitles: ['HireOnix AI', 'CloudOps Platform'],
+    relatedBlogSlugs: ['agentic-ai-langgraph-n8n', 'data-science-workflow-raw-data-to-deployed-model'],
+    relatedServiceSlugs: ['saas-development', 'full-stack-development', 'ai-automation'],
+  },
+];
+
+export function getService(slug: string): Service | undefined {
+  return services.find((s) => s.slug === slug);
+}

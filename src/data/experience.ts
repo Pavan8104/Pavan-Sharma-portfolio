@@ -22,7 +22,7 @@ export const experiences: Experience[] = [
   },
 
   {
-    id: 'exp-1',
+    id: 'exp-outlier',
     role: 'Coding expert and Aether generalist',
     company: 'Outlier',
     period: 'Present',
@@ -33,9 +33,9 @@ export const experiences: Experience[] = [
   },
   
   {
-    id: 'exp-1',
+    id: 'exp-mckinsey',
     role: 'Forward Learner',
-    company: 'MC Kisney',
+    company: 'McKinsey & Company',
     period: 'Present',
     description: 'Developing the Gen AI skills and Worked on analyzing platform data and deriving insights. Collaborated in team-based problem solving with a focus on structured thinking and real-world applications.',
     tech: ['Python', 'AI', 'Problem Solving'],
@@ -44,7 +44,7 @@ export const experiences: Experience[] = [
   },
 
   {
-    id: 'exp-1',
+    id: 'exp-hireonix-sa',
     role: 'Solution Architect Intern',
     company: 'Hireonix AI',
     period: 'Present',

@@ -38,7 +38,7 @@ Core Subjects: Data Structures & Algorithms, Backend Development, Intelligent Sy
 - AI model evaluation and real-world problem analysis
 - Technologies: Python, Agentic AI, AI, Problem Solving
 
-### McKinsey & Company (MC Kisney) — Forward Learner (Present)
+### McKinsey & Company — Forward Learner (Present)
 - Developing Gen AI skills and platform data analysis
 - Technologies: Python, AI, Problem Solving
 

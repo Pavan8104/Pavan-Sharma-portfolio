@@ -1,75 +1,56 @@
-# robots.txt — Pavan Sharma Portfolio
-# https://pavansharmaportfolio.in
-
-# ─── General Crawlers ───────────────────────────────────────────────────────
-User-agent: *
+User-Agent: *
 Allow: /
-Disallow: /dist/
 Disallow: /.env
 
-# ─── Google ─────────────────────────────────────────────────────────────────
-User-agent: Googlebot
+User-Agent: Googlebot
 Allow: /
 
-User-agent: Googlebot-Image
+User-Agent: Googlebot-Image
 Allow: /
 
-# ─── Bing / Microsoft / Copilot ─────────────────────────────────────────────
-User-agent: Bingbot
+User-Agent: Bingbot
 Allow: /
 
-User-agent: msnbot
+User-Agent: msnbot
 Allow: /
 
-# ─── AI / LLM Crawlers ──────────────────────────────────────────────────────
-
-# OpenAI — ChatGPT, ChatGPT Search, OpenAI Search
-User-agent: GPTBot
+User-Agent: GPTBot
 Allow: /
 
-User-agent: ChatGPT-User
+User-Agent: ChatGPT-User
 Allow: /
 
-User-agent: OAI-SearchBot
+User-Agent: OAI-SearchBot
 Allow: /
 
-# Anthropic — Claude
-User-agent: ClaudeBot
+User-Agent: ClaudeBot
 Allow: /
 
-User-agent: anthropic-ai
+User-Agent: anthropic-ai
 Allow: /
 
-# Google — Gemini, Bard, Search Generative Experience
-User-agent: Google-Extended
+User-Agent: Google-Extended
 Allow: /
 
-# Perplexity
-User-agent: PerplexityBot
+User-Agent: PerplexityBot
 Allow: /
 
-# Meta AI
-User-agent: Meta-ExternalAgent
+User-Agent: Meta-ExternalAgent
 Allow: /
 
-# Apple
-User-agent: Applebot
+User-Agent: Applebot
 Allow: /
 
-User-agent: Applebot-Extended
+User-Agent: Applebot-Extended
 Allow: /
 
-# Common Crawl (used by AI training datasets)
-User-agent: CCBot
+User-Agent: CCBot
 Allow: /
 
-# You.com
-User-agent: YouBot
+User-Agent: YouBot
 Allow: /
 
-# Cohere
-User-agent: cohere-ai
+User-Agent: cohere-ai
 Allow: /
 
-# ─── Sitemap ────────────────────────────────────────────────────────────────
 Sitemap: https://pavansharmaportfolio.in/sitemap.xml

@@ -1,0 +1,56 @@
+User-Agent: *
+Allow: /
+Disallow: /.env
+
+User-Agent: Googlebot
+Allow: /
+
+User-Agent: Googlebot-Image
+Allow: /
+
+User-Agent: Bingbot
+Allow: /
+
+User-Agent: msnbot
+Allow: /
+
+User-Agent: GPTBot
+Allow: /
+
+User-Agent: ChatGPT-User
+Allow: /
+
+User-Agent: OAI-SearchBot
+Allow: /
+
+User-Agent: ClaudeBot
+Allow: /
+
+User-Agent: anthropic-ai
+Allow: /
+
+User-Agent: Google-Extended
+Allow: /
+
+User-Agent: PerplexityBot
+Allow: /
+
+User-Agent: Meta-ExternalAgent
+Allow: /
+
+User-Agent: Applebot
+Allow: /
+
+User-Agent: Applebot-Extended
+Allow: /
+
+User-Agent: CCBot
+Allow: /
+
+User-Agent: YouBot
+Allow: /
+
+User-Agent: cohere-ai
+Allow: /
+
+Sitemap: https://pavansharmaportfolio.in/sitemap.xml

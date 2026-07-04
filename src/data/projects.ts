@@ -15,7 +15,7 @@ export interface Project {
 export const projects: Project[] = [
   // FEATURED PROJECTS (TOP 4)
   {
-    id: '15',
+    id: '1',
     title: 'CloudOps Platform',
     description: 'A cloud management platform for deployment, monitoring, and DevOps workflows.',
     tags: ['DevOps', 'Cloud', 'Docker', 'React'],

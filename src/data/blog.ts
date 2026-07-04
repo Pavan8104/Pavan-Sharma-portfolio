@@ -1,5 +1,6 @@
 export interface BlogPost {
   id: string;
+  slug: string;
   title: string;
   excerpt: string;
   date: string;
@@ -12,6 +13,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     id: 'blog-1',
+    slug: 'llm-red-teaming-sentinel-ai',
     title: 'LLM Red Teaming: How I Built Sentinel AI to Break Large Language Models',
     excerpt: 'Most AI systems are tested for what they should do. I built a framework to test what they should never do — and the results were eye-opening.',
     date: '2026-05-14',
@@ -80,6 +82,7 @@ The GitHub repo includes the full framework, documentation, and a test suite you
 
   {
     id: 'blog-2',
+    slug: 'building-production-rag-pipelines',
     title: 'Building Production RAG Pipelines: LangChain, ChromaDB, and Lessons Learned',
     excerpt: 'RAG looks simple on the surface — retrieve context, inject it, generate answer. Production RAG is a completely different beast. Here is what actually works.',
     date: '2026-04-28',
@@ -167,6 +170,7 @@ Good RAG is not about finding the best vector database. It's about: clean ingest
 
   {
     id: 'blog-3',
+    slug: 'agentic-ai-langgraph-n8n',
     title: 'Agentic AI in Practice: Building Real-World Automations with LangGraph and n8n',
     excerpt: 'An AI agent that can plan, use tools, and self-correct is not science fiction anymore. Here is how I build them and what actually breaks in production.',
     date: '2026-04-05',
@@ -269,6 +273,7 @@ The shift from single-call AI to multi-step agents is the biggest change in prac
 
   {
     id: 'blog-4',
+    slug: 'data-science-workflow-raw-data-to-deployed-model',
     title: 'Data Science Workflow: From Raw Data to a Deployed ML Model',
     excerpt: 'Clean data beats fancy algorithms every time. Here is the end-to-end workflow I follow for every data science project, from messy CSV to live prediction API.',
     date: '2026-03-18',
@@ -397,6 +402,7 @@ Eighty percent of time in data science is spent on phases 1 and 2. The model tra
 
   {
     id: 'blog-5',
+    slug: 'aws-solution-architect-real-lessons',
     title: 'AWS Solution Architect: Real Architecture Lessons Beyond the Certification',
     excerpt: 'Getting AWS certified teaches you what services exist. Building real systems teaches you which ones to actually use and which ones to avoid.',
     date: '2026-02-22',
