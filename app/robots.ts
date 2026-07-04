@@ -20,7 +20,15 @@ const AI_CRAWLERS = [
   'cohere-ai',
 ];
 
-const SEARCH_CRAWLERS = ['Googlebot', 'Googlebot-Image', 'Bingbot', 'msnbot'];
+const SEARCH_CRAWLERS = [
+  'Googlebot',
+  'Googlebot-Image',
+  'GoogleOther',
+  'GoogleOther-Image',
+  'GoogleOther-Video',
+  'Bingbot',
+  'msnbot',
+];
 
 export default function robots(): MetadataRoute.Robots {
   return {

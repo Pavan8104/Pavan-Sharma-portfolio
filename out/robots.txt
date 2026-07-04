@@ -8,6 +8,15 @@ Allow: /
 User-Agent: Googlebot-Image
 Allow: /
 
+User-Agent: GoogleOther
+Allow: /
+
+User-Agent: GoogleOther-Image
+Allow: /
+
+User-Agent: GoogleOther-Video
+Allow: /
+
 User-Agent: Bingbot
 Allow: /
 

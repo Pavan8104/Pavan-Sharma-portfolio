@@ -6,13 +6,13 @@ export const SITE_NAME = 'Pavan Sharma Portfolio';
 export const PERSON = {
   name: 'Pavan Sharma',
   alternateName: 'Pavan Kumar Sharma',
-  jobTitle: 'AI Agent Developer & Full Stack Engineer',
+  jobTitle: 'AI & Full Stack Software Developer',
   email: 'ps3297169@gmail.com',
   github: 'https://github.com/Pavan8104',
   linkedin: 'https://www.linkedin.com/in/pavan-sharma-1645ab276/',
   image: `${SITE_URL}/og-image.jpg`,
   description:
-    'Pavan Sharma is an AI Agent Developer and Full Stack Engineer helping global businesses build AI agents, automation systems, RAG pipelines, SaaS products, MVPs, and modern web applications. Experienced with Python, FastAPI, LangChain, LangGraph, OpenAI APIs, React, and Next.js.',
+    'Pavan Sharma is a global AI & Full Stack Software Developer helping businesses, startups, founders, and companies build websites, AI automation systems, SaaS platforms, and custom software solutions. Specialties: AI agents, LLM applications, RAG systems, AI chatbots, MVP development, and modern web applications with Python, FastAPI, LangChain, LangGraph, OpenAI APIs, React, and Next.js.',
 } as const;
 
 export const DEFAULT_DESCRIPTION =

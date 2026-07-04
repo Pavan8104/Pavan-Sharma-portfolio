@@ -1,4 +1,33 @@
 import { PERSON, SITE_URL, canonicalUrl } from './seo';
+import { services } from '../data/services';
+
+/** Priority markets first, then worldwide — used across Person/ProfessionalService/Service schemas */
+export const SERVICE_AREAS = [
+  'United States',
+  'United Kingdom',
+  'Canada',
+  'Australia',
+  'United Arab Emirates',
+  'Singapore',
+  'Germany',
+  'Switzerland',
+  'Netherlands',
+  'Sweden',
+  'Europe',
+  'Worldwide',
+];
+
+const AUDIENCE = {
+  '@type': 'Audience',
+  audienceType: [
+    'Business Owners',
+    'Startup Founders',
+    'Entrepreneurs',
+    'CEOs',
+    'CTOs',
+    'Companies',
+  ],
+};
 
 /** Renders a JSON-LD block. Server-component friendly. */
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
@@ -42,12 +71,14 @@ export function personSchema() {
     },
     address: { '@type': 'PostalAddress', addressCountry: 'IN', addressRegion: 'Punjab' },
     knowsAbout: [
-      'AI Agent Development', 'AI Automation', 'AI Chatbot Development',
+      'AI Agent Development', 'AI Automation', 'LLM Development',
+      'RAG Systems', 'AI Chatbots', 'SaaS Development', 'MVP Development',
+      'Website Development', 'Web Applications', 'Custom Software Development',
       'Python', 'Artificial Intelligence', 'Machine Learning', 'Data Science',
       'Large Language Models', 'LLM Red Teaming', 'RAG (Retrieval-Augmented Generation)',
       'Agentic AI', 'LangChain', 'LangGraph', 'Prompt Engineering', 'OpenAI API',
       'Full Stack Development', 'Backend Development', 'FastAPI', 'Next.js',
-      'SaaS Development', 'MVP Development', 'Business Automation',
+      'Business Automation',
       'Data Structures and Algorithms', 'Competitive Programming',
       'Cloud Computing', 'AWS', 'Docker', 'Computer Vision', 'NLP',
       'PostgreSQL', 'MongoDB', 'React.js', 'C++', 'Java', 'Streamlit',
@@ -55,11 +86,12 @@ export function personSchema() {
     ],
     hasOccupation: {
       '@type': 'Occupation',
-      name: 'AI Agent Developer & Full Stack Engineer',
+      name: 'AI & Full Stack Software Developer',
       occupationLocation: { '@type': 'Country', name: 'India' },
       skills:
-        'AI Agents, AI Automation, LLM Systems, RAG Pipelines, Python, FastAPI, Machine Learning, Data Science, Full Stack Development, React, Next.js, SaaS, MVP Development',
+        'AI Agents, AI Automation, LLM Development, RAG Systems, AI Chatbots, Python, FastAPI, Machine Learning, Full Stack Development, React, Next.js, SaaS Development, MVP Development, Website Development, Custom Software',
     },
+    workLocation: { '@type': 'Place', name: 'Remote — Worldwide' },
     sameAs: [PERSON.github, PERSON.linkedin],
   };
 }
@@ -70,33 +102,52 @@ export function websiteSchema() {
     '@type': 'WebSite',
     '@id': WEBSITE_ID,
     url: `${SITE_URL}/`,
-    name: 'Pavan Sharma | AI Agent Developer & Full Stack Engineer',
+    name: 'Pavan Sharma',
+    alternateName: 'Pavan Sharma | AI & Full Stack Software Developer',
     description:
-      'Portfolio and services of Pavan Sharma — AI Agent Developer and Full Stack Engineer. AI agents, automation, chatbots, RAG pipelines, SaaS products, MVPs, and modern web applications for global clients.',
+      'Global AI & Full Stack Software Developer helping businesses build intelligent digital solutions — websites, AI automation systems, SaaS platforms, and custom software.',
     inLanguage: 'en-US',
     author: { '@type': 'Person', '@id': PERSON_ID, name: PERSON.name },
     creator: { '@type': 'Person', '@id': PERSON_ID, name: PERSON.name },
+    publisher: { '@type': 'Person', '@id': PERSON_ID, name: PERSON.name },
+    sameAs: [PERSON.github, PERSON.linkedin],
   };
 }
 
-/** Freelance practice as an Organization/ProfessionalService for service pages. */
+/** Freelance practice as an Organization/ProfessionalService for entity understanding. */
 export function organizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     '@id': ORG_ID,
-    name: 'Pavan Sharma — AI & Full Stack Development Services',
+    name: 'Pavan Sharma — AI & Full Stack Software Development Services',
     url: `${SITE_URL}/services/`,
     image: PERSON.image,
     email: PERSON.email,
     founder: { '@type': 'Person', '@id': PERSON_ID, name: PERSON.name },
     description:
-      'Independent AI and software development practice building AI agents, automation systems, chatbots, RAG pipelines, SaaS platforms, MVPs, and modern web applications for startups and businesses worldwide.',
-    areaServed: [
-      'United States', 'United Kingdom', 'Canada', 'Australia', 'Europe',
-      'United Arab Emirates', 'Singapore', 'Germany', 'Netherlands', 'Sweden',
-      'Switzerland', 'Worldwide',
+      'Independent AI and software development practice helping businesses, startups, founders, and companies worldwide build websites, AI automation systems, AI agents, chatbots, RAG pipelines, SaaS platforms, MVPs, and custom software solutions.',
+    slogan: 'AI Development · AI Automation Solutions · Website Development · SaaS Development · Full Stack Development · Custom Software Solutions',
+    areaServed: SERVICE_AREAS,
+    audience: AUDIENCE,
+    knowsAbout: [
+      'AI Development', 'AI Automation Solutions', 'Website Development',
+      'SaaS Development', 'Full Stack Development', 'Custom Software Solutions',
     ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'AI & Software Development Services',
+      itemListElement: services.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          '@id': `${canonicalUrl(`/services/${s.slug}`)}#service`,
+          name: s.serviceType,
+          description: s.metaDescription,
+          url: canonicalUrl(`/services/${s.slug}`),
+        },
+      })),
+    },
     sameAs: [PERSON.github, PERSON.linkedin],
   };
 }
@@ -166,10 +217,8 @@ export function serviceSchema(opts: {
     description: opts.description,
     url: canonicalUrl(opts.path),
     provider: { '@type': 'Person', '@id': PERSON_ID, name: PERSON.name },
-    areaServed: [
-      'United States', 'United Kingdom', 'Canada', 'Australia', 'Europe',
-      'United Arab Emirates', 'Worldwide',
-    ],
+    areaServed: SERVICE_AREAS,
+    audience: AUDIENCE,
     availableChannel: {
       '@type': 'ServiceChannel',
       serviceUrl: `${SITE_URL}/contact/`,

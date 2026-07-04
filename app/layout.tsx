@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Orbitron, Fira_Code } from 'next/font/google';
 import { SITE_URL, SITE_NAME, DEFAULT_DESCRIPTION, PERSON } from '../src/lib/seo';
-import { JsonLd, personSchema, websiteSchema } from '../src/lib/schema';
+import { JsonLd, personSchema, websiteSchema, organizationSchema } from '../src/lib/schema';
 import '../src/index.css';
 
 const orbitron = Orbitron({
@@ -66,8 +66,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="dns-prefetch" href="//github.com" />
         <link rel="dns-prefetch" href="//linkedin.com" />
+        {/* Site-wide entity graph: Person ↔ WebSite ↔ ProfessionalService */}
         <JsonLd data={personSchema()} />
         <JsonLd data={websiteSchema()} />
+        <JsonLd data={organizationSchema()} />
       </head>
       <body>{children}</body>
     </html>
