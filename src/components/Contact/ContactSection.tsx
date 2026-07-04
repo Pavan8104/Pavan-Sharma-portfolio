@@ -22,7 +22,7 @@ function setRateData(data: { lastSent: number; dailyCount: number; dailyDate: st
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
-export default function ContactSection() {
+export default function ContactSection({ showFooter = true }: { showFooter?: boolean }) {
   const [formData, setFormData] = useState({ name: '', email: '', message: '', company: '' });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -316,12 +316,42 @@ export default function ContactSection() {
         </div>
 
         {/* Footer */}
+        {showFooter && (
         <motion.footer
           className="mt-20 pt-8 border-t border-cyan-900/20"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
+          {/* Service discovery links (crawlable) */}
+          <nav aria-label="Services" className="max-w-4xl mx-auto mb-6 text-center">
+            <p className="font-code text-[10px] text-neon-pink tracking-widest uppercase mb-2">
+              {'// Services'}
+            </p>
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+              {[
+                { label: 'AI Agent Development', href: '/services/ai-agent-development/' },
+                { label: 'AI Automation', href: '/services/ai-automation/' },
+                { label: 'AI Chatbots', href: '/services/ai-chatbot-development/' },
+                { label: 'RAG Systems', href: '/services/rag-development/' },
+                { label: 'LLM Apps', href: '/services/llm-development/' },
+                { label: 'Full Stack', href: '/services/full-stack-development/' },
+                { label: 'Web Development', href: '/services/web-development/' },
+                { label: 'SaaS', href: '/services/saas-development/' },
+                { label: 'MVP Development', href: '/services/mvp-development/' },
+                { label: 'Hire Me', href: '/hire-me/' },
+              ].map((s) => (
+                <a
+                  key={s.href}
+                  href={s.href}
+                  className="font-code text-[10px] text-cyber-blue-dim hover:text-cyber-blue transition-colors"
+                >
+                  {s.label}
+                </a>
+              ))}
+            </div>
+          </nav>
+
           <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Logo + copyright */}
             <div className="flex flex-col items-center md:items-start gap-1">
@@ -359,6 +389,7 @@ export default function ContactSection() {
             </div>
           </div>
         </motion.footer>
+        )}
       </div>
     </section>
   );

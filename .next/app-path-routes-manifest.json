@@ -2,5 +2,14 @@
   "/_not-found/page": "/_not-found",
   "/robots.txt/route": "/robots.txt",
   "/sitemap.xml/route": "/sitemap.xml",
-  "/page": "/"
+  "/blog/page": "/blog",
+  "/blog/[slug]/page": "/blog/[slug]",
+  "/about/page": "/about",
+  "/case-studies/page": "/case-studies",
+  "/hire-me/page": "/hire-me",
+  "/case-studies/[slug]/page": "/case-studies/[slug]",
+  "/page": "/",
+  "/services/page": "/services",
+  "/services/[slug]/page": "/services/[slug]",
+  "/contact/page": "/contact"
 }

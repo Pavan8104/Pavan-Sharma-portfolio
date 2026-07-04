@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { blogPosts, type BlogPost } from '../../data/blog';
+import { blogPosts } from '../../data/blog';
+import { playSound } from '../../hooks/useAudio';
 import BlogCard from './BlogCard';
-import BlogModal from './BlogModal';
 
 export default function BlogSection() {
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [threadPaths, setThreadPaths] = useState<string[]>([]);
 
@@ -97,22 +97,21 @@ export default function BlogSection() {
           ))}
         </svg>
 
-        {/* Blog grid */}
+        {/* Blog grid — cards link to real /blog/[slug] pages */}
         <div className="grid md:grid-cols-2 gap-6 relative z-10">
           {blogPosts.map((post, index) => (
             <div key={post.id} data-blog-id={post.id}>
-              <BlogCard
-                post={post}
-                index={index}
-                onClick={() => setSelectedPost(post)}
-              />
+              <Link href={`/blog/${post.slug}/`} className="block">
+                <BlogCard
+                  post={post}
+                  index={index}
+                  onClick={() => playSound('click')}
+                />
+              </Link>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Blog modal */}
-      <BlogModal post={selectedPost} onClose={() => setSelectedPost(null)} />
     </section>
   );
 }

@@ -2,5 +2,14 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/robots.txt/route": "app/robots.txt/route.js",
   "/sitemap.xml/route": "app/sitemap.xml/route.js",
-  "/page": "app/page.js"
+  "/blog/page": "app/blog/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js",
+  "/about/page": "app/about/page.js",
+  "/case-studies/page": "app/case-studies/page.js",
+  "/hire-me/page": "app/hire-me/page.js",
+  "/case-studies/[slug]/page": "app/case-studies/[slug]/page.js",
+  "/page": "app/page.js",
+  "/services/page": "app/services/page.js",
+  "/services/[slug]/page": "app/services/[slug]/page.js",
+  "/contact/page": "app/contact/page.js"
 }

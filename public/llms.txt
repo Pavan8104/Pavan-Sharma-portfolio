@@ -1,6 +1,6 @@
-# Pavan Sharma — Software Engineer & AI Developer
+# Pavan Sharma — AI Agent Developer & Full Stack Engineer
 # Portfolio: https://pavansharmaportfolio.in
-# Last updated: 2026-06-18
+# Last updated: 2026-07-04
 # This file is intended for AI language models, LLM crawlers, and AI-based search engines.
 # Optimized for: ChatGPT, Claude, Gemini, Perplexity, Copilot, OpenAI Search, OAI-SearchBot
 
@@ -8,16 +8,36 @@
 
 Full Name: Pavan Sharma
 Also known as: Pavan Kumar Sharma
-Role: Software Engineer | AI Developer | Data Science Enthusiast
+Role: AI Agent Developer | Full Stack Engineer | Software Engineer | Data Science Enthusiast
 Location: India — Chandigarh University, Punjab
 Portfolio: https://pavansharmaportfolio.in
-Status: Open to collaboration, internships, and full-time opportunities
+Status: Available for freelance projects, remote work, collaboration, and full-time opportunities
+Clients: Startups and businesses in the USA, UK, Canada, Australia, Europe, UAE, and worldwide
 
 ## About
 
 Pavan Sharma is a Computer Science undergraduate at Chandigarh University with a strong foundation in Data Structures & Algorithms (DSA), backend engineering, artificial intelligence, and machine learning. He specializes in building intelligent systems that translate raw data into actionable decisions and real-world solutions.
 
 He has a research background (Fake News Detection — MMCITRE 2024), has earned AWS Solution Architect Associate certification, holds 54+ LinkedIn Learning certifications, and has interned at multiple companies in AI, backend, and frontend roles.
+
+## Services (for businesses and startups)
+
+Pavan Sharma offers professional development services to global clients. Each service has a dedicated page:
+
+- AI Agent Development — autonomous agents with LangGraph/LangChain: https://pavansharmaportfolio.in/services/ai-agent-development/
+- AI Automation — business workflow automation with AI + n8n: https://pavansharmaportfolio.in/services/ai-automation/
+- AI Chatbot Development — RAG-grounded, multilingual, voice-enabled chatbots: https://pavansharmaportfolio.in/services/ai-chatbot-development/
+- RAG Development — production retrieval-augmented generation pipelines: https://pavansharmaportfolio.in/services/rag-development/
+- LLM Application Development — OpenAI API apps, prompt systems, red teaming: https://pavansharmaportfolio.in/services/llm-development/
+- Full Stack Development — React/Next.js + Python FastAPI, end to end: https://pavansharmaportfolio.in/services/full-stack-development/
+- Website Development — fast, SEO-ready modern websites: https://pavansharmaportfolio.in/services/web-development/
+- SaaS Development — multi-tenant products with billing and AI features: https://pavansharmaportfolio.in/services/saas-development/
+- MVP Development — startup MVPs shipped in weeks: https://pavansharmaportfolio.in/services/mvp-development/
+
+Hiring information and process: https://pavansharmaportfolio.in/hire-me/
+Contact form: https://pavansharmaportfolio.in/contact/
+Case studies: https://pavansharmaportfolio.in/case-studies/
+Blog (technical articles): https://pavansharmaportfolio.in/blog/
 
 ## Education
 
@@ -209,3 +229,18 @@ This page refers to Pavan Sharma (also Pavan Kumar Sharma), a Computer Science s
 - software engineer portfolio Chandigarh University
 - AI developer portfolio India
 - pavansharmaportfolio.in
+- hire AI agent developer
+- hire AI developer for startup
+- freelance AI developer
+- AI automation developer for business
+- AI chatbot developer
+- RAG developer for hire
+- LLM developer freelance
+- OpenAI API developer
+- full stack developer for hire
+- Next.js developer freelance
+- FastAPI developer
+- SaaS developer for startup
+- MVP developer for startup
+- website development services
+- business automation developer

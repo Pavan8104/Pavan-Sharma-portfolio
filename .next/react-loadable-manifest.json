@@ -2,7 +2,7 @@
   "src/components/Hero/HeroSection.tsx -> ../effects/HolographicShader": {
     "id": 2663,
     "files": [
-      "static/chunks/bd904a5c.1ef0d6cda87f035e.js",
+      "static/chunks/bd904a5c.399e9c2c859c9c14.js",
       "static/chunks/51749ec1.666a920e187f7313.js",
       "static/chunks/b536a0f1.d1b33f1d8aa9bc78.js",
       "static/chunks/851.cefe628e2d635c04.js",
@@ -16,13 +16,13 @@
   "src/components/Layout.tsx -> ./Chatbot/Chatbot": {
     "id": 9493,
     "files": [
-      "static/chunks/493.3baa541a608c5be0.js"
+      "static/chunks/493.f5470b48651898b6.js"
     ]
   },
   "src/components/Layout.tsx -> ./effects/StarfieldBackground": {
     "id": 204,
     "files": [
-      "static/chunks/bd904a5c.1ef0d6cda87f035e.js",
+      "static/chunks/bd904a5c.399e9c2c859c9c14.js",
       "static/chunks/51749ec1.666a920e187f7313.js",
       "static/chunks/b536a0f1.d1b33f1d8aa9bc78.js",
       "static/chunks/851.cefe628e2d635c04.js",

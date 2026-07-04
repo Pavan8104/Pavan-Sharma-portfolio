@@ -4,6 +4,7 @@ import { experiences } from '../data/experience';
 import { certifications } from '../data/certifications';
 import { achievements } from '../data/achievements';
 import { blogPosts } from '../data/blog';
+import { services } from '../data/services';
 import { normalizeQuery, translateResponse, type LanguageMode } from './languageProcessor';
 import { detectEmotion, type Emotion } from './emotionVoice';
 import { applyJarvisPersonality } from './jarvisPersonality';
@@ -58,7 +59,7 @@ const synonymMap: Record<Intent | 'general', string[]> = {
   projects: ['project', 'projects', 'work', 'build', 'apps', 'systems', 'demo', 'live', 'portfolio'],
   skills: ['skills', 'skill', 'tech', 'stack', 'tools', 'languages', 'frameworks', 'expertise'],
   experience: ['experience', 'intern', 'role', 'work', 'education', 'career', 'job', 'history'],
-  contact: ['contact', 'email', 'reach', 'connect', 'message', 'hire', 'talk', 'chat'],
+  contact: ['contact', 'email', 'reach', 'connect', 'message', 'hire', 'talk', 'chat', 'services', 'service', 'freelance', 'rates', 'quote', 'available'],
   achievements: ['achievement', 'award', 'certificate', 'certification', 'recognition', 'hackathon', 'research'],
   social: ['github', 'linkedin', 'social', 'profile', 'network'],
   certifications: ['certification', 'certifications', 'course', 'credential', 'badge'],
@@ -207,6 +208,53 @@ export function buildKnowledgeBase(): KnowledgeItem[] {
     techStack: ['LinkedIn'],
     links: [{ label: 'LinkedIn', url: 'https://www.linkedin.com/in/pavan-sharma-1645ab276/' }],
     sectionId: 'contact',
+  });
+
+  // Services offered — surfaced for hiring/service queries with links to the service pages
+  services.forEach((service) => {
+    base.push({
+      id: `service-${service.slug}`,
+      category: 'contact',
+      title: service.title,
+      description: service.intro,
+      keywords: [service.shortTitle, service.serviceType, ...service.techStack, 'service', 'hire', 'freelance', 'build', 'client'],
+      synonyms: [service.shortTitle.toLowerCase(), service.serviceType.toLowerCase(), service.slug.replace(/-/g, ' ')],
+      techStack: service.techStack,
+      links: [{ label: `${service.shortTitle} — details`, url: `/services/${service.slug}/` }],
+      sectionId: 'contact',
+    });
+  });
+
+  base.push({
+    id: 'hiring-info',
+    category: 'contact',
+    title: 'Hiring & services overview',
+    description:
+      'Available for freelance and remote work with global clients (USA, UK, Canada, Australia, Europe, UAE). Services: AI agent development, AI automation, AI chatbots, RAG systems, LLM applications, full stack development, web development, SaaS, and MVP development. Typical process: discovery call, fixed quote, weekly demos, full code handover. Response within 24 hours.',
+    keywords: ['hire', 'hiring', 'services', 'freelance', 'available', 'availability', 'rates', 'price', 'cost', 'quote', 'work together', 'client', 'remote'],
+    synonyms: ['hire', 'services', 'freelance', 'pricing'],
+    techStack: [],
+    links: [
+      { label: 'All services', url: '/services/' },
+      { label: 'Hire me', url: '/hire-me/' },
+      { label: 'Contact', url: '/contact/' },
+    ],
+    sectionId: 'contact',
+  });
+
+  // Blog articles — now real pages with URLs
+  blogPosts.forEach((post) => {
+    base.push({
+      id: `blog-${post.slug}`,
+      category: 'blog',
+      title: post.title,
+      description: post.excerpt,
+      keywords: [post.title, ...post.tags, 'blog', 'article', 'post', 'writing'],
+      synonyms: post.tags.map((tag) => tag.toLowerCase()),
+      techStack: post.tags,
+      links: [{ label: 'Read article', url: `/blog/${post.slug}/` }],
+      sectionId: 'blog',
+    });
   });
 
   return base;
