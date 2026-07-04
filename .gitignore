@@ -27,3 +27,5 @@ skills.md
 .env
 .env
 .env
+.next/
+.env.local
