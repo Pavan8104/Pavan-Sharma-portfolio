@@ -358,7 +358,8 @@ export default function ContactSection({ showFooter = true }: { showFooter?: boo
               <div className="font-cyber text-sm text-cyber-blue">
                 <span className="text-neon-pink">{'<'}</span>{LOGO}<span className="text-neon-pink">{'/>'}</span>
               </div>
-              <p className="font-code text-[10px] text-cyber-blue-dim">
+              {/* suppressHydrationWarning: year is baked at build time and may differ client-side after New Year */}
+              <p className="font-code text-[10px] text-cyber-blue-dim" suppressHydrationWarning>
                 Designed & Built by <span className="text-neon-pink">Pavan Sharma</span> — {new Date().getFullYear()}
               </p>
             </div>

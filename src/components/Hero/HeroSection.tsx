@@ -1,34 +1,38 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { playSound } from '../../hooks/useAudio';
 
 const HolographicShader = dynamic(() => import('../effects/HolographicShader'), { ssr: false });
 
-// Deterministic pseudo-random so server and client render identical particles
-function seededRandom(seed: number): number {
-  const x = Math.sin(seed * 12.9898) * 43758.5453;
-  return x - Math.floor(x);
-}
-
 interface HeroSectionProps {
   onHackClick: () => void;
 }
 
+interface Particle {
+  left: number;
+  top: number;
+  duration: number;
+}
+
 export default function HeroSection({ onHackClick }: HeroSectionProps) {
   const [showButton, setShowButton] = useState(false);
+  const [particles, setParticles] = useState<Particle[]>([]);
 
-  const particles = useMemo(
-    () =>
-      [...Array(8)].map((_, i) => ({
-        left: 10 + seededRandom(i * 3 + 1) * 80,
-        top: 10 + seededRandom(i * 3 + 2) * 80,
-        duration: 2 + seededRandom(i * 3 + 3) * 2,
-      })),
-    []
-  );
+  // Particles are generated only after mount: the server and the initial client
+  // render both produce an empty list, so hydration always matches, and
+  // Math.random() never runs during render.
+  useEffect(() => {
+    setParticles(
+      [...Array(8)].map(() => ({
+        left: 10 + Math.random() * 80,
+        top: 10 + Math.random() * 80,
+        duration: 2 + Math.random() * 2,
+      }))
+    );
+  }, []);
 
   // Show button after 2s delay
   useEffect(() => {

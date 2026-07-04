@@ -3,10 +3,10 @@
     "id": 2663,
     "files": [
       "static/chunks/bd904a5c.399e9c2c859c9c14.js",
-      "static/chunks/51749ec1.666a920e187f7313.js",
+      "static/chunks/b79b7286.091eb5feca1ae5d7.js",
       "static/chunks/b536a0f1.d1b33f1d8aa9bc78.js",
-      "static/chunks/851.cefe628e2d635c04.js",
-      "static/chunks/663.e5c961d44296a734.js"
+      "static/chunks/851.daad11f084fa8da3.js",
+      "static/chunks/663.939dc5470195e373.js"
     ]
   },
   "src/components/Layout.tsx -> ../hooks/useAudio": {
@@ -16,17 +16,17 @@
   "src/components/Layout.tsx -> ./Chatbot/Chatbot": {
     "id": 9493,
     "files": [
-      "static/chunks/493.f5470b48651898b6.js"
+      "static/chunks/493.0e7e625a0f59817e.js"
     ]
   },
   "src/components/Layout.tsx -> ./effects/StarfieldBackground": {
     "id": 204,
     "files": [
       "static/chunks/bd904a5c.399e9c2c859c9c14.js",
-      "static/chunks/51749ec1.666a920e187f7313.js",
+      "static/chunks/b79b7286.091eb5feca1ae5d7.js",
       "static/chunks/b536a0f1.d1b33f1d8aa9bc78.js",
-      "static/chunks/851.cefe628e2d635c04.js",
-      "static/chunks/204.a1ceaca2d796c396.js"
+      "static/chunks/851.daad11f084fa8da3.js",
+      "static/chunks/204.53af6a1a46658c66.js"
     ]
   }
 }

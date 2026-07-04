@@ -1,15 +1,15 @@
 {
   "/_not-found/page": "/_not-found",
-  "/sitemap.xml/route": "/sitemap.xml",
   "/robots.txt/route": "/robots.txt",
-  "/blog/[slug]/page": "/blog/[slug]",
-  "/contact/page": "/contact",
-  "/case-studies/page": "/case-studies",
+  "/sitemap.xml/route": "/sitemap.xml",
   "/about/page": "/about",
-  "/case-studies/[slug]/page": "/case-studies/[slug]",
-  "/services/page": "/services",
+  "/case-studies/page": "/case-studies",
   "/blog/page": "/blog",
-  "/page": "/",
+  "/contact/page": "/contact",
+  "/case-studies/[slug]/page": "/case-studies/[slug]",
+  "/blog/[slug]/page": "/blog/[slug]",
+  "/hire-me/page": "/hire-me",
   "/services/[slug]/page": "/services/[slug]",
-  "/hire-me/page": "/hire-me"
+  "/page": "/",
+  "/services/page": "/services"
 }

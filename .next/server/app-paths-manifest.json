@@ -1,15 +1,15 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/sitemap.xml/route": "app/sitemap.xml/route.js",
   "/robots.txt/route": "app/robots.txt/route.js",
-  "/blog/[slug]/page": "app/blog/[slug]/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/case-studies/page": "app/case-studies/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
   "/about/page": "app/about/page.js",
-  "/case-studies/[slug]/page": "app/case-studies/[slug]/page.js",
-  "/services/page": "app/services/page.js",
+  "/case-studies/page": "app/case-studies/page.js",
   "/blog/page": "app/blog/page.js",
-  "/page": "app/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/case-studies/[slug]/page": "app/case-studies/[slug]/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js",
+  "/hire-me/page": "app/hire-me/page.js",
   "/services/[slug]/page": "app/services/[slug]/page.js",
-  "/hire-me/page": "app/hire-me/page.js"
+  "/page": "app/page.js",
+  "/services/page": "app/services/page.js"
 }
