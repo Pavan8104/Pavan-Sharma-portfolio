@@ -4,7 +4,7 @@ import ContactSection from '../../src/components/Contact/ContactSection';
 import { buildMetadata } from '../../src/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Contact — Hire Pavan Sharma for AI & Full Stack Projects',
+  title: 'Contact — Start Your AI or Full Stack Project',
   description:
     'Contact Pavan Sharma for AI agent development, automation, chatbots, RAG systems, SaaS, MVP, and full stack projects. Remote work with clients in the USA, UK, Canada, Australia, Europe, UAE, and worldwide.',
   path: '/contact',

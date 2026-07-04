@@ -49,7 +49,7 @@ I enjoy working on projects that combine data, logic, and real-world impact.
 
 ### Frontend
 
-* React.js, Tailwind CSS
+* Next.js (App Router), React.js, Tailwind CSS
 * Framer Motion
 
 ## 📂 Projects

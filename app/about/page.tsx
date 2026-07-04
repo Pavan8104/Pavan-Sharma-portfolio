@@ -7,7 +7,7 @@ import { skills } from '../../src/data/skills';
 import { services } from '../../src/data/services';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'About Pavan Sharma — AI Agent Developer & Full Stack Engineer',
+  title: 'About — AI Agent Developer & Full Stack Engineer',
   description:
     'Pavan Sharma is an AI Agent Developer and Full Stack Engineer from India — Computer Science undergraduate at Chandigarh University, AI agent developer at micro1, AWS certified, published ML researcher, and builder of Sentinel AI.',
   path: '/about',

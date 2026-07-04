@@ -33,7 +33,7 @@ export const services: Service[] = [
     slug: 'ai-agent-development',
     title: 'AI Agent Development Services',
     shortTitle: 'AI Agents',
-    metaTitle: 'AI Agent Developer — Hire Pavan Sharma to Build AI Agents',
+    metaTitle: 'AI Agent Developer — Build Autonomous AI Agents for Your Business',
     metaDescription:
       'Hire an AI agent developer to build autonomous agents that plan, use tools, and self-correct. LangGraph, LangChain, and OpenAI API expertise for businesses in the USA, UK, Canada, Australia, Europe, and UAE.',
     serviceType: 'AI Agent Development',

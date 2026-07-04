@@ -21,8 +21,8 @@ FROM nginx:stable-alpine AS production
 # Remove default nginx static assets
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy built files from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copy built files from builder stage (Next.js static export)
+COPY --from=builder /app/out /usr/share/nginx/html
 
 # Copy custom nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf

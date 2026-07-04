@@ -1,15 +1,15 @@
 {
   "/_not-found/page": "/_not-found",
-  "/robots.txt/route": "/robots.txt",
   "/sitemap.xml/route": "/sitemap.xml",
-  "/blog/page": "/blog",
+  "/robots.txt/route": "/robots.txt",
   "/blog/[slug]/page": "/blog/[slug]",
-  "/about/page": "/about",
+  "/contact/page": "/contact",
   "/case-studies/page": "/case-studies",
-  "/hire-me/page": "/hire-me",
+  "/about/page": "/about",
   "/case-studies/[slug]/page": "/case-studies/[slug]",
-  "/page": "/",
   "/services/page": "/services",
+  "/blog/page": "/blog",
+  "/page": "/",
   "/services/[slug]/page": "/services/[slug]",
-  "/contact/page": "/contact"
+  "/hire-me/page": "/hire-me"
 }
