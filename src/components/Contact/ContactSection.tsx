@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playSound } from '../../hooks/useAudio';
@@ -82,10 +84,10 @@ export default function ContactSection() {
     setSending(true);
 
     emailjs.sendForm(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
       e.currentTarget,
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
     )
     .then(() => {
       // Update rate limit

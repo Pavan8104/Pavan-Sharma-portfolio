@@ -1,8 +1,17 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+'use client';
+
+import { useState, useEffect, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { playSound } from '../../hooks/useAudio';
 
-const HolographicShader = lazy(() => import('../effects/HolographicShader'));
+const HolographicShader = dynamic(() => import('../effects/HolographicShader'), { ssr: false });
+
+// Deterministic pseudo-random so server and client render identical particles
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+}
 
 interface HeroSectionProps {
   onHackClick: () => void;
@@ -10,6 +19,16 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onHackClick }: HeroSectionProps) {
   const [showButton, setShowButton] = useState(false);
+
+  const particles = useMemo(
+    () =>
+      [...Array(8)].map((_, i) => ({
+        left: 10 + seededRandom(i * 3 + 1) * 80,
+        top: 10 + seededRandom(i * 3 + 2) * 80,
+        duration: 2 + seededRandom(i * 3 + 3) * 2,
+      })),
+    []
+  );
 
   // Show button after 2s delay
   useEffect(() => {
@@ -23,9 +42,7 @@ export default function HeroSection({ onHackClick }: HeroSectionProps) {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Holographic shader layer */}
-      <Suspense fallback={null}>
-        <HolographicShader />
-      </Suspense>
+      <HolographicShader />
 
       {/* Subtle grid background */}
       <div className="absolute inset-0 cyber-grid-bg opacity-30" />
@@ -103,13 +120,13 @@ export default function HeroSection({ onHackClick }: HeroSectionProps) {
 
         {/* Floating glitch particles */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(8)].map((_, i) => (
+          {particles.map((particle, i) => (
             <motion.div
               key={i}
               className="absolute w-1 h-1 rounded-full"
               style={{
-                left: `${10 + Math.random() * 80}%`,
-                top: `${10 + Math.random() * 80}%`,
+                left: `${particle.left}%`,
+                top: `${particle.top}%`,
                 background: i % 2 === 0 ? '#00FFFF' : '#FF0099',
                 boxShadow: `0 0 6px ${i % 2 === 0 ? '#00FFFF' : '#FF0099'}`,
               }}
@@ -119,7 +136,7 @@ export default function HeroSection({ onHackClick }: HeroSectionProps) {
                 y: [0, -30, 0],
               }}
               transition={{
-                duration: 2 + Math.random() * 2,
+                duration: particle.duration,
                 repeat: Infinity,
                 delay: i * 0.4,
               }}

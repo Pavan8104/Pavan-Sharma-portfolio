@@ -1,4 +1,7 @@
-import { useEffect, lazy, Suspense } from 'react';
+'use client';
+
+import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { ChatProvider } from '../store/ChatContext';
 import { useAppStore } from '../stores/appStore';
 import BootScreen from './BootScreen';
@@ -17,8 +20,9 @@ import ToolboxSection from './Toolbox/ToolboxSection';
 import ContactSection from './Contact/ContactSection';
 import StatsCounter from './effects/StatsCounter';
 
-const StarfieldBackground = lazy(() => import('./effects/StarfieldBackground'));
-const Chatbot = lazy(() => import('./Chatbot/Chatbot'));
+// Browser-only (Three.js / Web Speech / localStorage) — skipped during static prerender
+const StarfieldBackground = dynamic(() => import('./effects/StarfieldBackground'), { ssr: false });
+const Chatbot = dynamic(() => import('./Chatbot/Chatbot'), { ssr: false });
 
 export default function Layout() {
   const { booted, showAbout, scrollLocked, setBoot, setShowAbout, setScrollLocked } =
@@ -34,13 +38,13 @@ export default function Layout() {
     setScrollLocked(false);
   };
 
-  // Lock/unlock scroll
+  // Lock/unlock scroll (also locked while the boot screen covers the page)
   useEffect(() => {
-    document.body.style.overflow = scrollLocked ? 'hidden' : 'auto';
+    document.body.style.overflow = scrollLocked || !booted ? 'hidden' : 'auto';
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [scrollLocked]);
+  }, [scrollLocked, booted]);
 
   return (
     <div className="min-h-screen bg-cyber-black text-cyber-blue relative">
@@ -55,11 +59,7 @@ export default function Layout() {
       }} />}
 
       {/* Background effects (lazy loaded) */}
-      {booted && (
-        <Suspense fallback={null}>
-          <StarfieldBackground />
-        </Suspense>
-      )}
+      {booted && <StarfieldBackground />}
 
       {/* Scanlines */}
       <ScanLines />
@@ -70,9 +70,11 @@ export default function Layout() {
       {/* Navbar */}
       {booted && <Navbar />}
 
-      {/* Main content */}
-      {booted && (
-        <main>
+      {/* Main content — always rendered so crawlers get the full page in static
+          HTML; the opaque BootScreen overlay covers it until boot completes.
+          Remounting on boot replays the entrance animations exactly as before. */}
+      {
+        <main key={booted ? 'booted' : 'booting'}>
           <HeroSection onHackClick={handleHackClick} />
           {!showAbout && (
             <>
@@ -98,7 +100,7 @@ export default function Layout() {
             </>
           )}
         </main>
-      )}
+      }
 
       {/* About overlay */}
       <AboutSection isVisible={showAbout} onEscape={handleEscape} />
@@ -106,9 +108,7 @@ export default function Layout() {
       {/* Chatbot assistant */}
       {booted && (
         <ChatProvider>
-          <Suspense fallback={null}>
-            <Chatbot />
-          </Suspense>
+          <Chatbot />
         </ChatProvider>
       )}
 

@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useState, useEffect } from 'react';
 import { playSound } from '../../hooks/useAudio';
 import { projects, type Project } from '../../data/projects';

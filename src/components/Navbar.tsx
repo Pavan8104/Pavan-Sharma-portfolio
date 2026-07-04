@@ -1,4 +1,7 @@
+'use client';
+
 import { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playSound, toggleAudio } from '../hooks/useAudio';
 import { useAppStore } from '../stores/appStore';
@@ -9,6 +12,7 @@ const navItems = [
   { label: 'Projects', href: '#projects' },
   { label: 'Experience', href: '#experience' },
   { label: 'Toolbox', href: '#toolbox' },
+  { label: 'Services', href: '/services/' },
   { label: 'Blog', href: '#blog' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -36,15 +40,19 @@ function AudioVisualizer({ active }: { active: boolean }) {
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ entranceDelay = 3.5 }: { entranceDelay?: number }) {
   const [activeSection, setActiveSection] = useState('hero');
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const audioEnabled = useAppStore((s) => s.audioEnabled);
+  const pathname = usePathname();
+  const router = useRouter();
 
   // Active section detection via IntersectionObserver
   useEffect(() => {
-    const sectionIds = navItems.map((item) => item.href.slice(1));
+    const sectionIds = navItems
+      .filter((item) => item.href.startsWith('#'))
+      .map((item) => item.href.slice(1));
     const observers: IntersectionObserver[] = [];
 
     sectionIds.forEach((id) => {
@@ -75,6 +83,15 @@ export default function Navbar() {
   const handleNavClick = (href: string) => {
     playSound('click');
     setMenuOpen(false);
+    if (!href.startsWith('#')) {
+      router.push(href);
+      return;
+    }
+    if (pathname !== '/') {
+      // Anchor sections live on the homepage — navigate there first
+      router.push(`/${href}`);
+      return;
+    }
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -89,7 +106,7 @@ export default function Navbar() {
         }`}
         initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8, delay: 3.5 }}
+        transition={{ duration: 0.8, delay: entranceDelay }}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
           {/* Logo */}

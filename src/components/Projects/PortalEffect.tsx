@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { playSound } from '../../hooks/useAudio';
 import type { Project } from '../../data/projects';

@@ -1,3 +1,5 @@
+'use client';
+
 import { Howl, Howler } from 'howler';
 import { useAppStore } from '../stores/appStore';
 
@@ -32,8 +34,10 @@ function getSound(name: string): Howl | null {
   return soundCache[name];
 }
 
-// Pre-load all sounds immediately
-Object.keys(SOUNDS).forEach((name) => getSound(name));
+// Pre-load all sounds immediately (browser only — Howler needs window/AudioContext)
+if (typeof window !== 'undefined') {
+  Object.keys(SOUNDS).forEach((name) => getSound(name));
+}
 
 export function playSound(name: string) {
   const { audioEnabled } = useAppStore.getState();

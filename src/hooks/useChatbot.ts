@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+'use client';
+
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { handleUserQuery, type ConversationContext, type NavigationAction, type QueryResponse } from '../utils/chatEngine';
 import { detectLanguage, type LanguageMode } from '../utils/languageProcessor';
 import { playNotificationBeep } from '../utils/soundSystem';
@@ -47,6 +49,7 @@ const welcomeMessage: ChatMessageType = {
 };
 
 function loadMessages(): ChatMessageType[] {
+  if (typeof window === 'undefined') return [welcomeMessage];
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) return JSON.parse(stored) as ChatMessageType[];
@@ -106,8 +109,13 @@ export function useChatbot() {
 
   useEffect(() => { languageModeRef.current = languageMode; }, [languageMode]);
 
-  const supportsSpeechRecognition = useMemo(() => {
-    return Boolean((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+  const [supportsSpeechRecognition, setSupportsSpeechRecognition] = useState(false);
+
+  // Detect after mount — window is unavailable during server rendering
+  useEffect(() => {
+    setSupportsSpeechRecognition(
+      Boolean((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition)
+    );
   }, []);
 
   // Persist messages

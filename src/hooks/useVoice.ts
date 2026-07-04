@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { speak as speakCore, cancelSpeech, warmVoiceCache, getVoices } from '../utils/voice';
 import type { Emotion } from '../utils/emotionVoice';

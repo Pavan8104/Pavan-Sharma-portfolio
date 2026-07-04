@@ -3,7 +3,7 @@ import type { Config } from "tailwindcss";
 export default {
   darkMode: ["class"],
   content: [
-    "./index.html",
+    "./app/**/*.{js,ts,jsx,tsx}",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -30,8 +30,8 @@ export default {
         'cyber-yellow': '#FFD700',
       },
       fontFamily: {
-        cyber: ['Orbitron', 'monospace'],
-        code: ['Fira Code', 'monospace'],
+        cyber: ['var(--font-orbitron)', 'Orbitron', 'monospace'],
+        code: ['var(--font-fira-code)', 'Fira Code', 'monospace'],
       },
       boxShadow: {
         'neon': '0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.4)',

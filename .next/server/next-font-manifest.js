@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/pavan/My newportfolio/portfolio/app/layout":["static/media/3703c28dcda155b1-s.p.woff2","static/media/9a4ee768fed045da-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';

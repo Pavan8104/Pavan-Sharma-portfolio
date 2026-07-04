@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useState, useEffect } from 'react';
 
 interface VirtualJoystickProps {
@@ -126,5 +128,3 @@ export default function VirtualJoystick({
     </div>
   );
 }
-
-

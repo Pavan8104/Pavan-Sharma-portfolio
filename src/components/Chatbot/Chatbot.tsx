@@ -1,3 +1,5 @@
+'use client';
+
 import { AnimatePresence, motion } from 'framer-motion';
 import { type FormEvent, useEffect, useRef, useState, useMemo } from 'react';
 import ChatMessage from './ChatMessage';

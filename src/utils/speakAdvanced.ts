@@ -33,7 +33,7 @@ function findBestVoice(): SpeechSynthesisVoice | null {
   return null;
 }
 
-if ('speechSynthesis' in window) {
+if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
   window.speechSynthesis.onvoiceschanged = () => {
     if (!cachedVoice) {
       const voices = window.speechSynthesis.getVoices();
@@ -60,7 +60,7 @@ function robotizeText(text: string): string {
 }
 
 export function speakAdvanced(text: string, emotion: Emotion): void {
-  if (!('speechSynthesis' in window)) return;
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
   const processed = robotizeText(text);
   const utterance = new SpeechSynthesisUtterance(processed);
   applyEmotion(utterance, emotion);

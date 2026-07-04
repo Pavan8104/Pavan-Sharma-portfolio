@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { playSound } from '../../hooks/useAudio';
 import type { BlogPost } from '../../data/blog';
@@ -12,7 +14,7 @@ export default function BlogCard({ post, index, onClick }: BlogCardProps) {
   return (
     <motion.div
       className="cyber-glass p-5 cursor-pointer group relative overflow-hidden"
-      initial={{ opacity: 0, y: 30, rotate: -1 + Math.random() * 2 }}
+      initial={{ opacity: 0, y: 30, rotate: -1 + ((index * 37) % 100) / 50 }}
       whileInView={{ opacity: 1, y: 0, rotate: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}

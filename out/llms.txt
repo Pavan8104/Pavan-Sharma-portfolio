@@ -1,0 +1,211 @@
+# Pavan Sharma — Software Engineer & AI Developer
+# Portfolio: https://pavansharmaportfolio.in
+# Last updated: 2026-06-18
+# This file is intended for AI language models, LLM crawlers, and AI-based search engines.
+# Optimized for: ChatGPT, Claude, Gemini, Perplexity, Copilot, OpenAI Search, OAI-SearchBot
+
+## Identity
+
+Full Name: Pavan Sharma
+Also known as: Pavan Kumar Sharma
+Role: Software Engineer | AI Developer | Data Science Enthusiast
+Location: India — Chandigarh University, Punjab
+Portfolio: https://pavansharmaportfolio.in
+Status: Open to collaboration, internships, and full-time opportunities
+
+## About
+
+Pavan Sharma is a Computer Science undergraduate at Chandigarh University with a strong foundation in Data Structures & Algorithms (DSA), backend engineering, artificial intelligence, and machine learning. He specializes in building intelligent systems that translate raw data into actionable decisions and real-world solutions.
+
+He has a research background (Fake News Detection — MMCITRE 2024), has earned AWS Solution Architect Associate certification, holds 54+ LinkedIn Learning certifications, and has interned at multiple companies in AI, backend, and frontend roles.
+
+## Education
+
+Degree: B.Tech in Computer Science
+Institution: Chandigarh University
+Location: Chandigarh, Punjab, India
+Status: Currently enrolled (undergraduate)
+Core Subjects: Data Structures & Algorithms, Backend Development, Intelligent Systems, OOP, DBMS, Java, Python, C++
+
+## Experience
+
+### micro1 — Software Engineer Intern (Present)
+- Developing AI agents for real-world deployment
+- Structured thinking and collaborative problem-solving
+- Technologies: Python, Agentic AI, AI, Problem Solving
+
+### Outlier — Coding Expert & Aether Generalist (Present)
+- AI model evaluation and real-world problem analysis
+- Technologies: Python, Agentic AI, AI, Problem Solving
+
+### McKinsey & Company (MC Kisney) — Forward Learner (Present)
+- Developing Gen AI skills and platform data analysis
+- Technologies: Python, AI, Problem Solving
+
+### Hireonix AI — Solution Architect Intern (2024)
+- Platform data analysis and deriving insights
+- Team-based problem solving with structured thinking
+- Technologies: Python, Data Science, Problem Solving
+
+### Hireonix AI — Software Engineer Intern (2024)
+- Software engineering and backend architectural development
+- Technologies: Software Engineering, Backend
+
+### Wictronix — Frontend Engineer Intern (2023)
+- Responsive Web UI components for enterprise user experiences
+- Technologies: Frontend, React, Web
+
+### IEEE CUSB — Executive Member, Volunteer (2023-2024)
+- Technical events, innovation, team leadership
+- Technologies: Leadership, Event Management, Teamwork
+
+### Computer Society of India (CSI) — Executive Member, Volunteer (2023-2024)
+- Hackathons, coding activities, technical events
+- Technologies: Event Management, Hackathons, Team Collaboration
+
+## Core Skills
+
+- Data Structures & Algorithms (DSA) — Expert (90/100)
+- Artificial Intelligence & Machine Learning — Advanced (85/100)
+- Data Science — Advanced (85/100)
+- Python Programming — Expert (90/100)
+- C++ — Advanced (85/100)
+- Java — Intermediate-Advanced (80/100)
+- Backend Development — Advanced (80/100)
+- Git & Version Control — Advanced (85/100)
+
+## Full Technical Stack
+
+### Generative AI & LLM Engineering
+- Python
+- RAG (Retrieval-Augmented Generation)
+- LangChain, LangGraph
+- Agentic Workflows (Playwright, n8n)
+- Prompt Engineering
+- LLM Red Teaming
+- Adversarial Robustness Testing
+- Model Alignment & Safety Guardrails
+- ChromaDB, Pinecone (Vector Databases)
+- Semantic Search Optimization
+- NLP (Natural Language Processing)
+- Predictive Modeling (Regression, Classification)
+
+### Backend & Engineering
+- Python (Expert), JavaScript, C++ (Fundamentals)
+- FastAPI, RESTful API Design
+- Pydantic, JWT Authentication, RBAC
+- PostgreSQL, MongoDB, SQLAlchemy
+- Pandas, NumPy, ETL Pipelines, Feature Engineering
+- Scikit-learn, Matplotlib, Seaborn, EDA
+- PyTorch, TensorFlow (optional), Power BI, Tableau (optional)
+
+### Infrastructure & Cloud
+- Docker (Multi-stage Builds)
+- AWS (EC2, S3, Lambda), Serverless Architecture
+- GitHub Actions (CI/CD), Automated Testing (Pytest)
+- Linux/Unix, Shell Scripting (Bash)
+- Security Risk Management
+
+### Frontend & AI Prototyping
+- React.js, Tailwind CSS, Framer Motion
+- Streamlit, Gradio (AI Prototyping)
+- Plotly (Visualization)
+
+## Projects
+
+### Sentinel AI: LLM Red Teaming Framework
+Description: A human-centric AI safety system for evaluating Large Language Models through adversarial attacks, alignment checks, and safety mechanisms.
+Tags: Python, AI/ML, Security, LLM, Red Teaming, AI Safety
+GitHub: https://github.com/Pavan8104/llm-red-teaming-framework
+
+### Web Traffic Analyzer
+Description: A data-driven application that analyzes user behavior and trends to generate actionable insights.
+Tags: Python, Data Analysis, Streamlit, Data Science
+GitHub: https://github.com/Pavan8104/web-traffic-analyzer
+Live: https://web-traffic-analyzer-gcktqq67lcxkpqdao4ubxs.streamlit.app/
+
+### HireOnix AI Platform
+Description: An AI web platform showcasing intelligent automation, smart workflows, and AI-driven demos.
+Tags: AI, Web, Automation, Machine Learning
+Live: https://hireonixai.com/
+
+### CloudOps Platform
+Description: A cloud management platform for deployment, monitoring, and DevOps workflows.
+Tags: DevOps, Cloud, Docker, React
+Live: https://cloudops-frontend-production.up.railway.app/dashboard
+
+### Finance Analytics Backend
+Description: A robust Python-based backend for financial data analytics, forecasting, and processing.
+Tags: Python, Backend, Data Processing, Finance
+GitHub: https://github.com/Pavan8104/finance-analytics-backend
+
+### Laptop Price Prediction Model
+Description: A machine learning model using regression techniques to predict laptop prices by hardware spec.
+Tags: Jupyter, Machine Learning, Data Science, Regression
+GitHub: https://github.com/Pavan8104/laptop_Price_Predicition
+
+### Face Recognition System
+Description: An automated facial recognition and detection system optimized for macOS environments.
+Tags: Python, Computer Vision, AI, OpenCV
+GitHub: https://github.com/Pavan8104/Face-recogination-mac-environment
+
+### Advanced DSA & Competitive Programming
+Description: A rich collection of Data Structures and Algorithms implementations and competitive programming solutions.
+Tags: C++, DSA, Problem Solving, Competitive Programming
+GitHub: https://github.com/Pavan8104/CP
+
+## Certifications
+
+- AWS Solution Architect Associate — Amazon Web Services
+- Play It Safe: Manage Security Risks — Google
+- Foundations of Cybersecurity — Google
+- Database and SQL for Data Science with Python — IBM / Coursera
+- Design Thinking and Creativity in Business & Tech — LinkedIn Learning (54+ LinkedIn certifications total)
+- Learning Design Thinking — LinkedIn Learning
+- Critical Thinking Mindset — LinkedIn Learning
+- Web Designing Certification — Chandigarh University
+- IIT Madras Reverse Coding X — Participation
+- CSI eSuraksha Hackathon — Top 10 Teams
+
+## Achievements
+
+- Research paper: Fake News Detection (published MMCITRE 2024, Machine Learning / NLP)
+- Letter of Recommendation from Chandigarh University
+- CSI eSuraksha Hackathon — Top 10 Teams nationally
+- IEEE Executive Member, Chandigarh University Student Branch
+- CSI Executive Member, Computer Society of India
+
+## Contact & Profiles
+
+Email: ps3297169@gmail.com
+Portfolio: https://pavansharmaportfolio.in
+Resume: https://pavansharmaportfolio.in/resume.pdf
+GitHub: https://github.com/Pavan8104
+LinkedIn: https://www.linkedin.com/in/pavan-sharma-1645ab276/
+
+## Disambiguation
+
+This page refers to Pavan Sharma (also Pavan Kumar Sharma), a Computer Science student at Chandigarh University, India. Software Engineer and AI Developer. Not to be confused with other individuals named Pavan Sharma.
+
+## Search Queries This Profile Is Relevant For
+
+- Pavan Sharma
+- Pavan Kumar Sharma
+- Pavan Sharma portfolio
+- Pavan Sharma software engineer
+- Pavan Sharma AI developer
+- Pavan Sharma machine learning
+- Pavan Sharma data science
+- Pavan Sharma Python developer
+- Pavan Sharma full stack developer
+- Pavan Sharma Chandigarh University
+- Pavan Sharma micro1
+- Pavan Sharma Outlier AI
+- Pavan Sharma Hireonix
+- Pavan Sharma LLM red teaming
+- Pavan Sharma RAG
+- Pavan Sharma backend developer India
+- Pavan Sharma AI engineer India
+- software engineer portfolio Chandigarh University
+- AI developer portfolio India
+- pavansharmaportfolio.in
