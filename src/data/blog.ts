@@ -1,6 +1,8 @@
 export interface BlogPost {
   id: string;
   slug: string;
+  /** Shown in the homepage blog grid (keeps the original five-card layout) */
+  featured?: boolean;
   title: string;
   excerpt: string;
   date: string;
@@ -12,8 +14,234 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: 'blog-6',
+    slug: 'how-ai-agents-help-businesses',
+    title: 'How AI Agents Help Businesses: Real Use Cases Beyond the Hype',
+    excerpt: 'AI agents are not chatbots with better marketing. Here is what they actually do for businesses - lead handling, operations, research - and how to tell a real use case from a demo.',
+    date: '2026-07-02',
+    tags: ['AI Agents', 'Business', 'Automation'],
+    readTime: '6 min read',
+    related: ['blog-8', 'blog-3'],
+    content: `## What an AI Agent Actually Is
+
+Strip away the hype and an AI agent is software that can **pursue a goal across multiple steps**: it plans, uses tools (your APIs, databases, email, browser), checks its own work, and keeps going until the task is done or a human needs to decide. A chatbot answers; an agent *acts*.
+
+I build agents professionally - at micro1 and for client projects - and the pattern behind every successful deployment is the same: a well-bounded goal, a small set of reliable tools, and guardrails that assume the model will sometimes be wrong.
+
+## Use Cases That Actually Work Today
+
+**Lead qualification and response.** An agent reads inbound inquiries, checks them against your ideal-customer criteria, enriches them with public data, drafts a tailored reply, and books qualified calls to your calendar. Sales teams stop losing hot leads to slow response times.
+
+**Document processing.** Invoices, contracts, applications - agents extract structured data from messy documents, validate it against your rules, and push it into your systems, flagging anything ambiguous for human review.
+
+**Reporting.** Instead of someone assembling the same weekly report from four tools, an agent pulls the numbers, writes the summary, and posts it to Slack or email - every week, without being reminded.
+
+**Research and monitoring.** Agents track competitors, regulations, or market signals and deliver digests with sources - the kind of work that is valuable but never urgent enough for a person to do consistently.
+
+## How to Tell a Real Use Case from a Demo
+
+Three questions separate production agents from conference demos:
+
+- **Is the goal bounded?** "Handle inbound support email triage" works. "Run my marketing" does not.
+- **Are the failure costs understood?** Good agent design puts human-approval gates exactly where a mistake would be expensive.
+- **Can you measure it?** Hours saved, response time, error rate. If you cannot measure it, you cannot trust it.
+
+## What It Takes to Build One
+
+The stack matters less than the engineering discipline: explicit state machines (I use LangGraph), strict tool schemas, output validation, cost limits, and an evaluation suite that attacks the agent before your users do - a practice I take seriously enough to have built [an LLM red-teaming framework](/case-studies/sentinel-ai-llm-red-teaming/) around it.
+
+If you are wondering whether your business has an agent-shaped problem, the answer is usually found in whatever repetitive work your team complains about most. That is where I start every [AI agent development](/services/ai-agent-development/) engagement - and if you want the fuller automation picture, see [AI automation solutions for businesses](/industries/ai-automation-solutions/).`,
+  },
+
+  {
+    id: 'blog-7',
+    slug: 'ai-automation-for-small-companies',
+    title: 'AI Automation for Small Companies: Where to Start',
+    excerpt: 'You do not need an enterprise budget to benefit from AI automation. A practical starting guide for small companies: which workflows to automate first, what it costs, and what to avoid.',
+    date: '2026-06-25',
+    tags: ['AI Automation', 'Small Business', 'n8n'],
+    readTime: '5 min read',
+    related: ['blog-6', 'blog-3'],
+    content: `## The Small-Company Advantage
+
+Big companies talk about AI transformation; small companies can actually do it. With fewer systems, fewer approval layers, and workflows everyone understands, a small business can go from "we should automate this" to "it is running" in weeks.
+
+The catch: small companies cannot afford failed experiments. So the question is not *whether* to use AI automation - it is *which workflow first*.
+
+## The First-Automation Checklist
+
+The best first automation scores high on all three:
+
+- **High volume**: happens daily or weekly, not quarterly
+- **Low judgment**: a competent new hire could do it with a checklist
+- **Painful**: someone on your team actively dislikes doing it
+
+In practice, the winners are almost always one of these:
+
+**Inbound email triage.** Classify, route, and draft replies for the mail your team processes by hand. An LLM handles the variation ("can u send invoice pls" vs. a formal request) that breaks rule-based filters.
+
+**Document data entry.** Invoices, orders, and forms arrive as PDFs and end up retyped into spreadsheets or accounting software. Extraction plus validation removes the retyping and most of the errors.
+
+**Report assembly.** If someone copies numbers from three tools into one document every week, that is a pipeline, not a job.
+
+**Lead follow-up.** Speed wins deals. An automation that responds to inquiries in minutes - personalized, accurate, on-brand - outperforms a busy human responding in days.
+
+## What It Actually Costs
+
+A single focused automation is a 1-3 week build, not a transformation program. The right way to price it is against hours: if a workflow eats 10 hours a week and the automation reclaims 8, the build typically pays for itself within a quarter. I quote fixed prices tied to that math - see [AI automation services](/services/ai-automation/) for how the engagement works.
+
+## What to Avoid
+
+**Automating judgment you cannot verify.** If nobody can check whether the AI decided correctly, do not automate that step yet.
+
+**All-or-nothing rollouts.** Good automations launch in review mode - a human approves each output - and go fully automatic only after the accuracy is proven on your real data.
+
+**Tool-first thinking.** Buying an "AI platform" and then hunting for uses is backwards. Start from the workflow, then pick the minimal tooling: often n8n plus a small custom service is all it takes.
+
+Small companies that start with one well-chosen workflow build the confidence - and the internal playbook - to automate the next five. If you want help picking that first workflow, that is exactly what my [automation audit](/industries/ai-automation-solutions/) covers.`,
+  },
+
+  {
+    id: 'blog-8',
+    slug: 'ai-agent-vs-chatbot',
+    title: 'AI Agent vs Chatbot: What Is the Difference and Which Do You Need?',
+    excerpt: 'Chatbot and AI agent are used interchangeably in marketing - but they solve different business problems. A plain-language guide to choosing the right one.',
+    date: '2026-06-18',
+    tags: ['AI Agents', 'Chatbots', 'Business'],
+    readTime: '5 min read',
+    related: ['blog-6', 'blog-2'],
+    content: `## Two Words, Two Different Tools
+
+A **chatbot** converses. Its job is to answer questions accurately - about your product, policies, or documents - and hand off to a human when it should. It reacts to whoever shows up.
+
+An **AI agent** acts. Its job is to complete a task: process this application, follow up with this lead, assemble this report. It may never talk to a customer at all.
+
+The confusion is understandable - both are built on the same large language models. But choosing the wrong one is like hiring a receptionist when you needed an operations manager.
+
+## When a Chatbot Is the Right Answer
+
+You want a chatbot when the bottleneck is **answering people**:
+
+- Support teams answering the same questions daily
+- Website visitors who leave because they cannot find an answer at 2 a.m.
+- Internal teams asking "where is the doc for X?"
+
+The quality bar that matters: the bot must answer from *your* content - grounded in your documents with RAG - and say "I do not know, let me connect you" instead of inventing answers. That grounding is the difference between the [production chatbots I build](/services/ai-chatbot-development/) and the widget that embarrasses your brand. (The JARVIS assistant on this site is a working example - multilingual and voice-enabled.)
+
+## When You Need an Agent
+
+You want an agent when the bottleneck is **work getting done**:
+
+- Leads waiting hours for follow-up
+- Documents queuing for manual processing
+- Reports assembled by hand every week
+- Multi-step processes where a person mostly moves data between tools
+
+Agents plan, call your systems, verify results, and escalate exceptions. They are harder to build well - they need state machines, tool guardrails, and evaluation - which is why [AI agent development](/services/ai-agent-development/) is an engineering discipline, not a plugin.
+
+## The Honest Decision Test
+
+Ask: **"If I hired a person for this, what would their job title be?"**
+
+- If the answer is *support rep* or *front desk* - you want a chatbot.
+- If the answer is *coordinator*, *analyst*, or *ops assistant* - you want an agent.
+- If the answer is *both* - start with the chatbot (faster to ship, immediately visible), then extend it with agent capabilities. The architectures compose well when they are planned together.
+
+## They Work Best Combined
+
+The strongest deployments I build start conversational and end operational: a chatbot that answers a customer's question, then *acts* on the follow-up - books the call, files the ticket, updates the record. If you are weighing which side to start on, [describe your workflow to me](/contact/) and I will give you a straight answer, including "you do not need either yet" when that is the truth.`,
+  },
+
+  {
+    id: 'blog-9',
+    slug: 'building-a-saas-mvp',
+    title: 'Building a SaaS MVP: A Practical Guide for Founders',
+    excerpt: 'Most SaaS MVPs fail before launch - killed by scope, not competition. A founder-focused guide to scoping, building, and shipping a SaaS product users will pay for.',
+    date: '2026-06-10',
+    tags: ['SaaS', 'MVP', 'Startup'],
+    readTime: '6 min read',
+    related: ['blog-6', 'blog-5'],
+    content: `## The MVP Killer Is Scope, Not Code
+
+Every failed SaaS MVP I have seen died the same way: the founder kept adding "essential" features until the runway ran out before the launch. The discipline that ships products is subtraction - finding the *one workflow* a user would pay for, and building only that.
+
+A useful scoping test: describe your product in one sentence of the form *"It lets [who] do [what] without [pain]."* Everything not required by that sentence goes on the post-launch roadmap.
+
+## What a Real MVP Must Include
+
+Minimum does not mean fragile. To charge money, you need:
+
+- **Real authentication** - accounts, password reset, and a tenant model that keeps customer data isolated
+- **The core workflow** - polished enough that a stranger can succeed without a demo call
+- **Billing** - Stripe subscriptions from day one; retrofitting billing later is painful
+- **A deployable foundation** - hosting, backups, and error visibility, so launch day is boring
+
+What it does *not* need: an admin panel for every table, five pricing tiers, SSO, or a mobile app.
+
+## The Stack That Does Not Need Rewriting
+
+Founders sometimes fear an MVP means throwaway code. It does not have to. I build SaaS MVPs on Next.js with TypeScript, Python FastAPI, PostgreSQL, Stripe, and Docker on AWS - the same [full stack development](/services/full-stack-development/) foundations serious companies scale on. You may rewrite *features* as you learn; you should never have to rewrite the *foundation*.
+
+The differentiator in most new SaaS today is an AI capability: assistant, smart search over customer data, document automation. Building that well - grounded, evaluated, cost-controlled - is my specialty, and it is often what makes an early product feel like magic in a demo.
+
+## The Build Rhythm That Works
+
+A 2-6 week MVP build, structured properly, looks like:
+
+1. **Week 0 - scope.** One workflow, a fixed quote, and a milestone plan.
+2. **Weekly demos.** You steer with working software in hand, not mockups.
+3. **Launch.** Deployed product, real users, analytics wired up.
+4. **Handover.** Full source-code ownership and documentation your future team can inherit.
+
+## When to Get Help
+
+If you are technical, build the MVP yourself - you will learn the most. If you are not, or your time is better spent on customers, hire one developer who can own the entire product rather than coordinating a team before product-market fit. That end-to-end model is exactly how I run [SaaS](/services/saas-development/) and [MVP development](/industries/startup-mvp-development/) engagements: fixed quote, weekly demos, and you own everything at handover.`,
+  },
+
+  {
+    id: 'blog-10',
+    slug: 'choosing-a-website-developer',
+    title: 'Choosing a Website Developer: What Businesses Should Actually Look For',
+    excerpt: 'Price and portfolio screenshots are the wrong filters. Here is how to evaluate a website developer on the things that determine whether your site brings in business.',
+    date: '2026-06-03',
+    tags: ['Web Development', 'Business', 'SEO'],
+    readTime: '5 min read',
+    related: ['blog-9', 'blog-5'],
+    content: `## The Screenshot Trap
+
+Most businesses choose a website developer by comparing portfolio screenshots and prices. Both are nearly useless signals: screenshots show taste (which you can also get from a template), and price tells you nothing about what you receive for it.
+
+A website is a business asset. Evaluate the developer the way you would evaluate any investment: by what it returns.
+
+## The Questions That Actually Filter
+
+**"How will my site load fast?"** The answer should include specifics - static generation or server rendering, image optimization, measured Core Web Vitals - not "we optimize everything." Speed is a Google ranking factor and a conversion factor; slow sites quietly lose both.
+
+**"How will customers find it?"** A competent developer builds technical SEO in from the start: semantic HTML, per-page metadata, structured data (JSON-LD), a sitemap, and - increasingly important - content that AI search engines like ChatGPT and Perplexity can understand and cite. If the developer's own site is invisible on Google, believe what you see.
+
+**"What happens after launch?"** You should own the domain, the code, and the hosting account. You should be able to update content without paying for every comma. Ask how updates work *before* signing.
+
+**"Can it grow into an application?"** Today a brochure site; next year a booking system, customer portal, or dashboard. A developer with [full stack development](/services/full-stack-development/) capability builds a foundation that grows instead of one you replace.
+
+## Red Flags Worth Walking Away From
+
+- No live sites they can show performing well on speed tests you run yourself
+- Everything built on a page builder they resell with a markup
+- Vague answers about SEO ("we handle that") with no artifacts to show
+- No mention of mobile, accessibility, or analytics until you ask
+- Lock-in: their hosting, their CMS, their contract, forever
+
+## What a Good Engagement Looks Like
+
+Clear scope and a fixed quote. A preview link early, so you react to a real site instead of a slideshow. Technical SEO and analytics as standard, not upsells. Documentation and full ownership at handover.
+
+That is how I run [business website projects](/industries/business-website-development/) - and this portfolio, custom 3D effects and all, doubles as the performance proof: run it through any speed or SEO tool you like. If you are comparing developers right now, [send me the brief](/contact/) and I will tell you honestly whether I am the right fit for it.`,
+  },
+
+  {
     id: 'blog-1',
     slug: 'llm-red-teaming-sentinel-ai',
+    featured: true,
     title: 'LLM Red Teaming: How I Built Sentinel AI to Break Large Language Models',
     excerpt: 'Most AI systems are tested for what they should do. I built a framework to test what they should never do — and the results were eye-opening.',
     date: '2026-05-14',
@@ -83,6 +311,7 @@ The GitHub repo includes the full framework, documentation, and a test suite you
   {
     id: 'blog-2',
     slug: 'building-production-rag-pipelines',
+    featured: true,
     title: 'Building Production RAG Pipelines: LangChain, ChromaDB, and Lessons Learned',
     excerpt: 'RAG looks simple on the surface — retrieve context, inject it, generate answer. Production RAG is a completely different beast. Here is what actually works.',
     date: '2026-04-28',
@@ -171,6 +400,7 @@ Good RAG is not about finding the best vector database. It's about: clean ingest
   {
     id: 'blog-3',
     slug: 'agentic-ai-langgraph-n8n',
+    featured: true,
     title: 'Agentic AI in Practice: Building Real-World Automations with LangGraph and n8n',
     excerpt: 'An AI agent that can plan, use tools, and self-correct is not science fiction anymore. Here is how I build them and what actually breaks in production.',
     date: '2026-04-05',
@@ -274,6 +504,7 @@ The shift from single-call AI to multi-step agents is the biggest change in prac
   {
     id: 'blog-4',
     slug: 'data-science-workflow-raw-data-to-deployed-model',
+    featured: true,
     title: 'Data Science Workflow: From Raw Data to a Deployed ML Model',
     excerpt: 'Clean data beats fancy algorithms every time. Here is the end-to-end workflow I follow for every data science project, from messy CSV to live prediction API.',
     date: '2026-03-18',
@@ -403,6 +634,7 @@ Eighty percent of time in data science is spent on phases 1 and 2. The model tra
   {
     id: 'blog-5',
     slug: 'aws-solution-architect-real-lessons',
+    featured: true,
     title: 'AWS Solution Architect: Real Architecture Lessons Beyond the Certification',
     excerpt: 'Getting AWS certified teaches you what services exist. Building real systems teaches you which ones to actually use and which ones to avoid.',
     date: '2026-02-22',

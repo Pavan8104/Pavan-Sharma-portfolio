@@ -39,7 +39,7 @@ export const services: Service[] = [
     serviceType: 'AI Agent Development',
     icon: '🤖',
     intro:
-      'I design and build AI agents that go beyond chat — autonomous systems that plan multi-step work, call your tools and APIs, verify their own output, and complete real business tasks. I develop AI agents professionally at micro1 and build agentic workflows with LangGraph and n8n.',
+      'I design and build AI agents that go beyond chat — autonomous systems that plan multi-step work, call your tools and APIs, verify their own output, and complete real business tasks. As an AI developer for businesses, I develop AI agents professionally at micro1 and build custom AI solutions and agentic workflows with LangGraph and n8n.',
     problem:
       'Most businesses use AI as a fancy autocomplete. The real value appears when AI can execute processes end-to-end — researching, deciding, calling systems, and reporting back — without a human driving every step. Building that reliably is hard: naive agents loop forever, hallucinate tool inputs, and fail silently.',
     solution:
@@ -88,7 +88,7 @@ export const services: Service[] = [
     serviceType: 'AI Workflow Automation',
     icon: '⚙️',
     intro:
-      'I automate the repetitive work that eats your team\'s week — document processing, data entry, reporting, lead handling, content pipelines — by combining LLMs with workflow engines like n8n and custom Python services.',
+      'I build automation systems that take over the repetitive work eating your team\'s week — document processing, data entry, reporting, lead handling, content pipelines — combining LLMs with workflow engines like n8n and custom Python services. Custom AI solutions shaped around how your business actually operates, not a one-size-fits-all tool.',
     problem:
       'Teams lose hours daily to copy-paste work between tools: reading emails, updating spreadsheets, moving data between CRM, docs, and dashboards. Traditional automation breaks the moment input isn\'t perfectly structured; that\'s exactly where AI-powered automation shines.',
     solution:
@@ -132,7 +132,7 @@ export const services: Service[] = [
     serviceType: 'AI Chatbot Development',
     icon: '💬',
     intro:
-      'I build chatbots that actually know your business — grounded in your documents with RAG, matched to your brand voice, and able to hand off to humans when needed. The JARVIS assistant on this site (multilingual, voice-enabled) is one I built from scratch.',
+      'I build chatbots that actually know your business — custom AI solutions grounded in your documents with RAG, matched to your brand voice, and able to hand off to humans when needed. The JARVIS assistant on this site (multilingual, voice-enabled) is one I built from scratch, the way an AI developer for businesses should: production-grade, not a demo.',
     problem:
       'Generic chatbot widgets frustrate users with canned answers and hallucinate when asked anything specific. Businesses need assistants that answer from their real docs and data, capture leads, and escalate gracefully — without leaking wrong information.',
     solution:
@@ -308,7 +308,7 @@ export const services: Service[] = [
     serviceType: 'Website Development',
     icon: '🌐',
     intro:
-      'I build fast, modern, SEO-ready websites with Next.js and Tailwind CSS — from high-converting landing pages to full business sites and interactive web apps. This portfolio, with its custom 3D and animation work, is built and optimized by me.',
+      'I build fast, modern, SEO-ready business websites with Next.js and Tailwind CSS — from high-converting landing pages to full company sites and interactive web apps, backed by full stack development skills when a site needs to become an application. This portfolio, with its custom 3D and animation work, is built and optimized by me.',
     problem:
       'Slow template sites lose visitors and rank poorly. Businesses need sites that load instantly, look sharp on every device, communicate clearly, and are structured so both Google and AI search engines can understand and recommend them.',
     solution:
@@ -352,7 +352,7 @@ export const services: Service[] = [
     serviceType: 'SaaS Product Development',
     icon: '📦',
     intro:
-      'I build SaaS products from zero to launch: multi-tenant data models, authentication, subscription billing, admin dashboards, and — increasingly the differentiator — built-in AI features like assistants, automation, and smart search.',
+      'I build SaaS products from zero to launch: multi-tenant data models, authentication, subscription billing, admin dashboards, and — increasingly the differentiator — built-in AI features like assistants, automation systems, and smart search. Startup software development, done with the discipline of production engineering.',
     problem:
       'Founders burn months and budgets on SaaS builds that stall: over-engineered architecture, missing billing edge cases, no path from prototype to production. Meanwhile the market window narrows.',
     solution:

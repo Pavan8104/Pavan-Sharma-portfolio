@@ -97,9 +97,11 @@ export default function BlogSection() {
           ))}
         </svg>
 
-        {/* Blog grid — cards link to real /blog/[slug] pages */}
+        {/* Blog grid — cards link to real /blog/[slug] pages.
+            Only featured posts render here so the homepage keeps its original layout;
+            all posts live at /blog. */}
         <div className="grid md:grid-cols-2 gap-6 relative z-10">
-          {blogPosts.map((post, index) => (
+          {blogPosts.filter((post) => post.featured).map((post, index) => (
             <div key={post.id} data-blog-id={post.id}>
               <Link href={`/blog/${post.slug}/`} className="block">
                 <BlogCard

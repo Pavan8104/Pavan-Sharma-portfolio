@@ -50,6 +50,14 @@ export default function BlogMarkdown({ content }: { content: string }) {
         strong: ({ children }) => (
           <strong className="text-cyber-blue font-bold">{children}</strong>
         ),
+        a: ({ children, href }) => (
+          <a
+            href={href}
+            className="text-cyber-blue underline decoration-neon-pink/50 underline-offset-2 hover:text-neon-pink transition-colors"
+          >
+            {children}
+          </a>
+        ),
         blockquote: ({ children }) => (
           <blockquote className="border-l-2 border-cyber-purple pl-4 my-4 italic text-cyber-blue-dim">
             {children}

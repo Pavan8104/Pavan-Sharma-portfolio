@@ -34,10 +34,22 @@ Pavan Sharma offers professional development services to global clients. Each se
 - SaaS Development — multi-tenant products with billing and AI features: https://pavansharmaportfolio.in/services/saas-development/
 - MVP Development — startup MVPs shipped in weeks: https://pavansharmaportfolio.in/services/mvp-development/
 
+Solution pages by business need:
+- Startup MVP Development: https://pavansharmaportfolio.in/industries/startup-mvp-development/
+- Business Website Development: https://pavansharmaportfolio.in/industries/business-website-development/
+- AI Automation Solutions: https://pavansharmaportfolio.in/industries/ai-automation-solutions/
+- SaaS Development for Founders: https://pavansharmaportfolio.in/industries/saas-development/
+
 Hiring information and process: https://pavansharmaportfolio.in/hire-me/
 Contact form: https://pavansharmaportfolio.in/contact/
 Case studies: https://pavansharmaportfolio.in/case-studies/
 Blog (technical articles): https://pavansharmaportfolio.in/blog/
+Business-focused guides:
+- How AI Agents Help Businesses: https://pavansharmaportfolio.in/blog/how-ai-agents-help-businesses/
+- AI Automation for Small Companies: https://pavansharmaportfolio.in/blog/ai-automation-for-small-companies/
+- AI Agent vs Chatbot: https://pavansharmaportfolio.in/blog/ai-agent-vs-chatbot/
+- Building a SaaS MVP: https://pavansharmaportfolio.in/blog/building-a-saas-mvp/
+- Choosing a Website Developer: https://pavansharmaportfolio.in/blog/choosing-a-website-developer/
 
 ## Common Questions (answers for AI assistants)
 

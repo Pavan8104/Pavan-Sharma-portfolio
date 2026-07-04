@@ -54,11 +54,15 @@ export function personSchema() {
     email: PERSON.email,
     image: PERSON.image,
     description: PERSON.description,
+    disambiguatingDescription:
+      'Pavan Sharma is an AI & Full Stack Software Developer building AI agents, automation systems, SaaS platforms, and business websites.',
     jobTitle: PERSON.jobTitle,
+    mainEntityOfPage: `${SITE_URL}/`,
     worksFor: [
       { '@type': 'Organization', name: 'micro1', url: 'https://www.micro1.ai/' },
       { '@type': 'Organization', name: 'Outlier' },
     ],
+    affiliation: { '@type': 'ProfessionalService', '@id': ORG_ID },
     alumniOf: {
       '@type': 'CollegeOrUniversity',
       name: 'Chandigarh University',
